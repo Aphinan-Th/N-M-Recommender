@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nm_recommender/screens/login_page.dart';
-import 'package:nm_recommender/screens/movie_page.dart';
-import 'package:nm_recommender/widgets/navbar.dart';
 
 void main() {
   runApp(const MyApp());

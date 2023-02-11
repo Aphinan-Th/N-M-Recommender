@@ -18,6 +18,6 @@ class _MoviePageState extends State<MoviePage> {
           color: Colors.green,
         )),
       ],
-    );;
+    );
   }
 }
