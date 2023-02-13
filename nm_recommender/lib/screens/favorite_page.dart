@@ -18,6 +18,6 @@ class _FavoritePageState extends State<FavoritePage> {
           color: Colors.yellow,
         )),
       ],
-    );;
+    );
   }
 }
