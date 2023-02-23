@@ -26,13 +26,26 @@ func (handler *UserHandler) GetAllUser(c *gin.Context) {
 	c.JSON(200, result)
 }
 
-func (handler *UserHandler) PostUser(c *gin.Context) {
+func (handler *UserHandler) SignIn(c *gin.Context) {
 	var user model.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(500, err)
 	}
 
-	result, err := handler.UserService.InsertUser(user)
+	result, err := handler.UserService.SignIn(user)
+	if err != nil {
+		c.JSON(500, err)
+	}
+	c.JSON(201, result)
+}
+
+func (handler *UserHandler) LogIn(c *gin.Context) {
+	var user model.UserLogin
+	if err := c.ShouldBindJSON(&user); err != nil {
+		c.JSON(500, err)
+	}
+
+	result, err := handler.UserService.LogIn(user)
 	if err != nil {
 		c.JSON(500, err)
 	}

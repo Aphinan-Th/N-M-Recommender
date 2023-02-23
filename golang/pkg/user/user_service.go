@@ -4,7 +4,8 @@ import "github.com/aphinan633040184-9/golang-basic/pkg/model"
 
 type IUserService interface {
 	GetAllUser() ([]model.User, error)
-	InsertUser(user model.User) (model.User, error)
+	SignIn(user model.User) (model.User, error)
+	LogIn(user model.UserLogin) (model.UserLogin, error)
 }
 
 type UserService struct {
@@ -22,7 +23,12 @@ func (service *UserService) GetAllUser() ([]model.User, error) {
 	return result, err
 }
 
-func (service *UserService) InsertUser(user model.User) (model.User, error) {
-	result, err := service.UserRepository.InsertUser(user)
+func (service *UserService) SignIn(user model.User) (model.User, error) {
+	result, err := service.UserRepository.SignIn(user)
+	return result, err
+}
+
+func (service *UserService) LogIn(user model.UserLogin) (model.UserLogin, error) {
+	result, err := service.UserRepository.LogIn(user)
 	return result, err
 }
