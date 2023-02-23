@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nm_recommender/assets/style.dart';
 
 class MoviePage extends StatefulWidget {
   const MoviePage({super.key});
@@ -13,9 +15,22 @@ class _MoviePageState extends State<MoviePage> {
     return Column(
       children: [
         Expanded(
-            child: Container(
-          height: 100,
-          color: Colors.green,
+            child: Column(
+          children: [
+            header("Welcome"),
+            Text(
+              "outfit",
+              style: GoogleFonts.outfit(
+                  textStyle: const TextStyle(
+                      fontSize: 30, fontWeight: FontWeight.bold)),
+            ),
+            Text(
+              "lobster",
+              style: GoogleFonts.lobster(
+                  textStyle: const TextStyle(
+                      fontSize: 30, fontWeight: FontWeight.bold)),
+            ),
+          ],
         )),
       ],
     );

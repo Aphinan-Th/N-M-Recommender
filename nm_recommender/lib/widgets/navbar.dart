@@ -40,8 +40,8 @@ class _NavbarState extends State<Navbar> {
   final action = [
     null,
     null,
-    Icon(Icons.search, color: black),
-    Icon(Icons.search, color: black),
+    const Icon(Icons.search, color: ThemeColor.black),
+    const Icon(Icons.search, color: ThemeColor.black),
   ];
 
   @override
@@ -50,16 +50,13 @@ class _NavbarState extends State<Navbar> {
         appBar: List<AppBar>.generate(
             4,
             (index) => AppBar(
-                  backgroundColor: primaryBg,
+                  backgroundColor: ThemeColor.primaryBg,
                   elevation: 0,
-                  title: Text(
-                    title[index],
-                    style: TextStyle(fontFamily: "Outfit", color: black),
-                  ),
+                  title: header(title[index]),
                   leading: GestureDetector(
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_back_ios,
-                      color: black,
+                      color: ThemeColor.black,
                     ),
                     onTap: () {
                       Navigator.pop(context);
@@ -79,7 +76,7 @@ class _NavbarState extends State<Navbar> {
         body: tap[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
-          selectedItemColor: primary,
+          selectedItemColor: ThemeColor.primary,
           unselectedItemColor: Colors.grey,
           showSelectedLabels: false,
           showUnselectedLabels: false,
