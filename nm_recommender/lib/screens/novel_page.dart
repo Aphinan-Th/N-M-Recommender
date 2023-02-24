@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nm_recommender/widgets/avatar.dart';
 
 class NovelPage extends StatefulWidget {
   const NovelPage({super.key});
