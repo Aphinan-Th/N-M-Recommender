@@ -36,6 +36,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:
@@ -78,14 +79,14 @@ flutter:
   fonts:
     - family: Outfit
       fonts:
-        - asset: assets/fonts/outfit/Outfit-Black.ttf
-        - asset: assets/fonts/outfit/Outfit-Bold.ttf
-        - asset: assets/fonts/outfit/Outfit-ExtraBold.ttf
-        - asset: assets/fonts/outfit/Outfit-ExtraLight.ttf
-        - asset: assets/fonts/outfit/Outfit-Medium.ttf
-        - asset: assets/fonts/outfit/Outfit-Regular.ttf
-        - asset: assets/fonts/outfit/Outfit-SemiBold.ttf
-        - asset: assets/fonts/outfit/Outfit-Thin.ttf
+        - asset: lib/assets/fonts/outfit/Outfit-Black.ttf
+        - asset: lib/assets/fonts/outfit/Outfit-Bold.ttf
+        - asset: lib/assets/fonts/outfit/Outfit-ExtraBold.ttf
+        - asset: lib/assets/fonts/outfit/Outfit-ExtraLight.ttf
+        - asset: lib/assets/fonts/outfit/Outfit-Medium.ttf
+        - asset: lib/assets/fonts/outfit/Outfit-Regular.ttf
+        - asset: lib/assets/fonts/outfit/Outfit-SemiBold.ttf
+        - asset: lib/assets/fonts/outfit/Outfit-Thin.ttf
 
     # - family: Trajan Pro
     #   fonts:
