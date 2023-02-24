@@ -5,13 +5,15 @@ class CreateTextField extends StatefulWidget {
   final Color borderColor;
   final Color errorBorderColor;
   final String validation;
+  final IconData icon;
 
   const CreateTextField(
       {Key? key,
       required this.hintText,
       required this.borderColor,
       required this.errorBorderColor,
-      required this.validation})
+      required this.validation,
+      required this.icon})
       : super(key: key);
 
   @override
@@ -54,9 +56,8 @@ class _CreateTextFieldState extends State<CreateTextField> {
                           width: 1.0, color: widget.errorBorderColor),
                       borderRadius: BorderRadius.circular(20.0)),
                   suffixIcon: GestureDetector(
-                      child: Icon(Icons.clear),
+                      child: Icon(widget.icon),
                       onTap: () {
-                        debugPrint("Click!!");
                         clearText();
                       })),
               validator: (value) {
@@ -70,10 +71,10 @@ class _CreateTextFieldState extends State<CreateTextField> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text('-')));
+                    .showSnackBar(const SnackBar(content: Text('-')));
               }
             },
-            child: Text('Submit'),
+            child: const Text('Submit'),
           )
         ]));
   }
