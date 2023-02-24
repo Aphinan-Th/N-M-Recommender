@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nm_recommender/screens/login_page.dart';
+import 'package:nm_recommender/screens/suggestion_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "N&MRecommender",
       home: SafeArea(
-          child: LoginPage(
+          child: SuggestPage(
         key: key,
       )),
     );
