@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:nm_recommender/assets/style.dart';
+import 'package:nm_recommender/screens/login_page.dart';
+import 'package:nm_recommender/widgets/button.dart';
+import 'package:nm_recommender/screens/movie_page.dart';
+import 'package:nm_recommender/widgets/navbar.dart';
 
 class SuggestPage extends StatelessWidget {
   const SuggestPage({Key? key}) : super(key: key);
@@ -10,8 +15,9 @@ class SuggestPage extends StatelessWidget {
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            TopOfSuggestPage()
+          children: const [
+            TopOfSuggestPage(),
+            ButtonOfSuggestPage()
           ],
         ),
       ),
@@ -119,7 +125,7 @@ class _PageInfoState extends State<PageInfo> {
         itemCount: pageInfo.length,
         itemBuilder: (context, index) {
           return Container(
-            width: screenW,
+            width: MediaQuery.of(context).size.width,
             child: TemplatePage(
               image: pageInfo[index + 1]!["image"]!,
               sectionName: pageInfo[index + 1]!["sectionName"]!,
@@ -131,3 +137,32 @@ class _PageInfoState extends State<PageInfo> {
     );
   }
 }
+
+class ButtonOfSuggestPage extends StatelessWidget {
+  const ButtonOfSuggestPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Button(buttonName: "Login",
+            bgColor: ThemeColor.white,
+            width: 300, height: 40,
+            callBack: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
+            },
+            textColor: ThemeColor.black),
+        SizedBox(height: 20),
+        Button(buttonName: "Continue with guest",
+            bgColor: ThemeColor.primary,
+            width: 300, height: 40,
+            callBack: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Navbar()));
+            },
+            textColor: ThemeColor.white),
+      ],
+
+    );
+  }
+}
+

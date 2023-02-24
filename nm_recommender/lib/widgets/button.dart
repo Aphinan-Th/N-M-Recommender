@@ -34,8 +34,9 @@ class _ButtonState extends State<Button> {
             borderRadius: BorderRadius.circular(20.0),
             boxShadow: const [
               BoxShadow(
-                  color: Colors.black54, blurRadius: 1.5, spreadRadius: 1.1)
-            ]),
+                  color: Colors.black54, blurRadius: 3.0, spreadRadius: 0)
+            ]
+        ),
         child: Center(
           child: Text(widget.buttonName,
               style: TextStyle(
