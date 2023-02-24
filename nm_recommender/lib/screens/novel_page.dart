@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nm_recommender/widgets/avatar.dart';
 
 import '../widgets/text_field.dart';
 
