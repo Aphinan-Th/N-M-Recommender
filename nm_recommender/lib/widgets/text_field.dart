@@ -54,7 +54,7 @@ class _CreateTextFieldState extends State<CreateTextField> {
                           width: 1.0, color: widget.errorBorderColor),
                       borderRadius: BorderRadius.circular(20.0)),
                   suffixIcon: GestureDetector(
-                      child: Icon(Icons.clear),
+                      child: const Icon(Icons.clear),
                       onTap: () {
                         debugPrint("Click!!");
                         clearText();
@@ -70,10 +70,10 @@ class _CreateTextFieldState extends State<CreateTextField> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text('-')));
+                    .showSnackBar(const SnackBar(content: Text('-')));
               }
             },
-            child: Text('Submit'),
+            child: const Text('Submit'),
           )
         ]));
   }

@@ -1,17 +1,13 @@
-import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class ApiService {
-  Future getMovieInfo() async {
-    try {
-      var url = Uri.parse("localhost:8080/user");
-      var response = await http.get(url);
-      if (response.statusCode == 200) {
-        var _model = response.body;
-        return _model;
-      }
-    } catch (e) {
-      log(e.toString());
-    }
+Future getMoviePopular() async {
+  final response = await http.get(Uri.parse('http://10.0.2.2:8080/tmdb-movie-popular'));
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    return data;
+  } else {
+    throw Exception('Failed to fetch data');
   }
 }

@@ -44,7 +44,8 @@ func main() {
 	r.POST("/todo", todohandler.PostTodo)
 	r.GET("/user", userhandler.GetAllUser)
 	r.POST("/user", userhandler.PostUser)
-	r.GET("/tmdb", tmdbhandler.GetMovieInfo)
+	r.GET("/tmdb-movie-info", tmdbhandler.GetMovieInfo)
+	r.GET("/tmdb-movie-popular/", tmdbhandler.GetMoviePopular)
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
