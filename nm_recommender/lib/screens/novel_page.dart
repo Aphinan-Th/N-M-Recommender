@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../services/api-service.dart';
-
 class NovelPage extends StatefulWidget {
   const NovelPage({super.key});
 

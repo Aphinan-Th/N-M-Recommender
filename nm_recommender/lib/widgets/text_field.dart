@@ -5,13 +5,15 @@ class CreateTextField extends StatefulWidget {
   final Color borderColor;
   final Color errorBorderColor;
   final String validation;
+  final IconData icon;
 
   const CreateTextField(
       {Key? key,
       required this.hintText,
       required this.borderColor,
       required this.errorBorderColor,
-      required this.validation})
+      required this.validation,
+      required this.icon})
       : super(key: key);
 
   @override
@@ -54,9 +56,8 @@ class _CreateTextFieldState extends State<CreateTextField> {
                           width: 1.0, color: widget.errorBorderColor),
                       borderRadius: BorderRadius.circular(20.0)),
                   suffixIcon: GestureDetector(
-                      child: const Icon(Icons.clear),
+                      child: Icon(widget.icon),
                       onTap: () {
-                        debugPrint("Click!!");
                         clearText();
                       })),
               validator: (value) {
