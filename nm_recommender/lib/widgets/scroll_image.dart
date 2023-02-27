@@ -6,7 +6,16 @@ import '../assets/base_url.dart';
 
 class ScrollImage extends StatelessWidget {
   final List<String> urlImage;
-  const ScrollImage({super.key, required this.urlImage});
+  final double width, height;
+  final EdgeInsets padding;
+  final bool isLoading;
+  const ScrollImage(
+      {super.key,
+      required this.urlImage,
+      required this.width,
+      required this.height,
+      required this.padding,
+      required this.isLoading});
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +29,12 @@ class ScrollImage extends StatelessWidget {
                 children: List.generate(
                     urlImage.length,
                     (index) => Padding(
-                        padding: const EdgeInsets.only(left: 24, right: 24),
+                        padding: padding,
                         child: PreviewImage(
+                            isLoading: isLoading,
                             urlImage: "${BaseUrl.poster}${urlImage[index]}",
-                            width: 150,
-                            height: 200,
+                            width: width,
+                            height: height,
                             callBack: () =>
                                 Navigator.pushNamed(context, '/detail')))),
               ),

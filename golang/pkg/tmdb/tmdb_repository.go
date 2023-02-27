@@ -1,14 +1,31 @@
 package tmdb
 
 import (
+	"fmt"
+
 	"github.com/ryanbradynd05/go-tmdb"
 )
 
 var tmdbAPI *tmdb.TMDb
 
+const baseURL string = "https://api.themoviedb.org/3"
+const ApiKey string = "7d2b91f400ce0e8625786102fdf95451"
+
 type ITMDbRepository interface {
 	GetMovieInfo(opt map[string]string) (*tmdb.Movie, error)
 	GetMoviePopular(opt map[string]string) (*tmdb.MoviePagedResults, error)
+	GetMovieRecommendations(id int, opt map[string]string) (*tmdb.MovieRecommendations, error)
+}
+
+func getOptionsString(options map[string]string, availableOptions map[string]struct{}) string {
+	var optionsString = ""
+	for key, val := range options {
+		if _, ok := availableOptions[key]; ok {
+			newString := fmt.Sprintf("%s&%s=%s", optionsString, key, val)
+			optionsString = newString
+		}
+	}
+	return optionsString
 }
 
 type TMDbRepository struct {
@@ -25,11 +42,27 @@ func NewTMDbRepository() *TMDbRepository {
 }
 
 func (repo TMDbRepository) GetMovieInfo(opt map[string]string) (*tmdb.Movie, error) {
-	spanishFightClub, err := tmdbAPI.GetMovieInfo(550, opt)
-	return spanishFightClub, err
+	result, err := tmdbAPI.GetMovieInfo(550, opt)
+	return result, err
 }
 
 func (repo TMDbRepository) GetMoviePopular(opt map[string]string) (*tmdb.MoviePagedResults, error) {
-	spanishFightClub, err := tmdbAPI.GetMoviePopular(opt)
-	return spanishFightClub, err
+	result, err := tmdbAPI.GetMoviePopular(opt)
+	return result, err
 }
+
+func (repo TMDbRepository) GetMovieRecommendations(id int, opt map[string]string) (*tmdb.MovieRecommendations, error) {
+	result, err := tmdbAPI.GetMovieRecommendations(id, opt)
+	return result, err
+}
+
+// func (repo TMDbRepository) GetMovieGenres() {
+// 	var availableOptions = map[string]struct{}{
+// 		"page":     {},
+// 		"language": {}}
+// 	var popular MoviePagedResults
+// 	optionsString := getOptionsString(opt, availableOptions)
+// 	uri := fmt.Sprintf("%s/movie/popular?api_key=%s%s", baseURL, ApiKey, optionsString)
+// 	result, err := tmdb.getTmdb(uri, &popular)
+// 	return result.(*MoviePagedResults), err
+// }

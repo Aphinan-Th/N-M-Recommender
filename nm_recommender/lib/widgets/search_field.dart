@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import '../assets/style.dart';
 
 class SearchField extends StatelessWidget {
-  final List<String> items;
   final ValueChanged<String> onSearch;
-  const SearchField({super.key, required this.items, required this.onSearch});
+  const SearchField({super.key, required this.onSearch});
 
   @override
   Widget build(BuildContext context) {
