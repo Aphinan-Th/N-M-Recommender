@@ -12,20 +12,26 @@ class ThemeColor {
 }
 
 class ThemeText {
-  static TextStyle titleMedium = const TextStyle(
+  static TextStyle bw60032 = const TextStyle(
       fontSize: 32, fontWeight: FontWeight.w600, color: ThemeColor.black);
-  static TextStyle titleSmall = const TextStyle(
+  static TextStyle bw50024 = const TextStyle(
       fontSize: 24, fontWeight: FontWeight.w500, color: ThemeColor.black);
-  static TextStyle bodyText2 = const TextStyle(
+  static TextStyle gw40014 = const TextStyle(
       fontSize: 14, fontWeight: FontWeight.w400, color: ThemeColor.gray);
-  static TextStyle subtitle2 = const TextStyle(
+  static TextStyle bw40016 = const TextStyle(
       fontSize: 16, fontWeight: FontWeight.w400, color: ThemeColor.black);
-  static TextStyle subtitle3 = const TextStyle(
+  static TextStyle ww40016 = const TextStyle(
       fontSize: 16, fontWeight: FontWeight.w400, color: ThemeColor.white);
+  static TextStyle ww60016 = const TextStyle(
+      fontSize: 16, fontWeight: FontWeight.bold, color: ThemeColor.white);
+  static TextStyle bw60020 = const TextStyle(
+      fontSize: 20, fontWeight: FontWeight.bold, color: ThemeColor.black);
 }
 
-Widget title(text) => Text(text, style: ThemeText.titleMedium);
-Widget header(text) => Text(text, style: ThemeText.titleSmall);
-Widget body(text) => Text(text, style: ThemeText.bodyText2);
-Widget buttonBlack(text) => Text(text, style: ThemeText.subtitle2);
-Widget buttonWhite(text) => Text(text, style: ThemeText.subtitle3);
+Widget title(text) => Text(text, style: ThemeText.bw60032);
+Widget header(text) => Text(text, style: ThemeText.bw50024);
+Widget body(text) => Text(text, style: ThemeText.gw40014);
+Widget buttonBlack(text) => Text(text, style: ThemeText.bw40016);
+Widget buttonWhite(text) => Text(text, style: ThemeText.ww40016);
+Widget bold16(text) => Text(text, style: ThemeText.ww60016);
+Widget bold20(text) => Text(text, style: ThemeText.bw60020);

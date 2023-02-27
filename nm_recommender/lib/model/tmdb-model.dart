@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final tmDb = tmDbFromJson(jsonString);
+//     final tmDbPopular = tmDbPopularFromJson(jsonString);
 
 import 'dart:convert';
 
-TmDb tmDbFromJson(String str) => TmDb.fromJson(json.decode(str));
+TmDbPopular tmDbPopularFromJson(String str) => TmDbPopular.fromJson(json.decode(str));
 
-String tmDbToJson(TmDb data) => json.encode(data.toJson());
+String tmDbPopularToJson(TmDbPopular data) => json.encode(data.toJson());
 
-class TmDb {
-    TmDb({
+class TmDbPopular {
+    TmDbPopular({
         required this.id,
         required this.page,
         required this.results,
@@ -23,7 +23,7 @@ class TmDb {
     int totalPages;
     int totalResults;
 
-    factory TmDb.fromJson(Map<String, dynamic> json) => TmDb(
+    factory TmDbPopular.fromJson(Map<String, dynamic> json) => TmDbPopular(
         id: json["ID"],
         page: json["Page"],
         results: List<Result>.from(json["Results"].map((x) => Result.fromJson(x))),
