@@ -1,21 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:nm_recommender/assets/style.dart';
+import 'package:nm_recommender/screens/login_page.dart';
+import 'package:nm_recommender/screens/movie_page.dart';
 import 'package:nm_recommender/widgets/avatar.dart';
+import 'package:nm_recommender/widgets/button.dart';
+import 'package:nm_recommender/widgets/navbar.dart';
+import '../widgets/text_field.dart';
+import 'package:nm_recommender/assets/style.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
   @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ThemeColor.white,
       appBar: AppBar(
-        title: const Text("Sign Up"),
+        backgroundColor: ThemeColor.white,
+        elevation: 0,
+        leading: GestureDetector(
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: ThemeColor.black,
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+            );
+          },
+        ),
+        title: Text("Sign Up",
+        style: TextStyle(color: ThemeColor.black, fontSize: 25),),
       ),
       body: Column(
         children: [
-          EditPicture(),
-          DetailInfo(),
+          Container(
+            child: EditPicture(),
+          ),
+          Container(
+            child: DetailInfo(),
+          ),
+          Container(
+            child: SignUpButton(),
+          )
         ],
+
       )
       //DetailInfo(),
     );
@@ -85,7 +120,7 @@ class _DetailInfoState extends State<DetailInfo> {
     final screenW = MediaQuery.of(context).size.width;
     debugPrint(screenW.toString());
     return Container(
-      height: 500,
+      height: 380,
       child: ListView.builder(
         itemCount: detailInfo.length,
         itemBuilder: (context, index) {
@@ -101,6 +136,7 @@ class _DetailInfoState extends State<DetailInfo> {
     );
   }
 }
+
 // platform detail use for 3 text field
 class PlatformDetail extends StatefulWidget {
   const PlatformDetail({Key? key, required int this.num, required this.info,}) : super(key: key);
@@ -130,24 +166,25 @@ class _PlatformDetailState extends State<PlatformDetail> {
           Column(
             children: [
               Container(
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.only(left: 30, bottom: 10, top: 20),
                 alignment: Alignment.centerLeft,
                 child: Text(headDetail,
                   style: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 20, right: 20),
+                margin: EdgeInsets.only(left: 40, right: 40),
                 alignment: Alignment.centerLeft,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: hintTextField,
-                  ),
-                ),
+                child: CreateTextField(
+                  hintText: hintTextField,
+                  borderColor: ThemeColor.gray,
+                  errorBorderColor: ThemeColor.alternate,
+                  validation: "-",
+                  icon: Icons.clear,
+                )
               ),
             ],
           ),
@@ -168,7 +205,14 @@ class _SignUpButtonState extends State<SignUpButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
+      child: Button(buttonName: "Log in",
+      textColor: ThemeColor.black,
+      bgColor: ThemeColor.white,
+      width: 330, height: 40,
+      callBack: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const Navbar(),),);
+      },)
     );
   }
 }
