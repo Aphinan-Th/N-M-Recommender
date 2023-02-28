@@ -6,14 +6,16 @@ class CreateTextField extends StatefulWidget {
   final Color errorBorderColor;
   final String validation;
   final IconData icon;
+  int? maxLines;
 
-  const CreateTextField(
+  CreateTextField(
       {Key? key,
       required this.hintText,
       required this.borderColor,
       required this.errorBorderColor,
       required this.validation,
-      required this.icon})
+      required this.icon,
+      this.maxLines})
       : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class _CreateTextFieldState extends State<CreateTextField> {
         key: _formKey,
         child: Column(children: [
           TextFormField(
+            maxLength: widget.maxLines,
               controller: fieldText,
               decoration: InputDecoration(
                   hintText: widget.hintText,

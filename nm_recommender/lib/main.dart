@@ -3,6 +3,7 @@ import 'package:nm_recommender/providers/movie_provider.dart';
 import 'package:nm_recommender/screens/login_page.dart';
 import 'package:nm_recommender/screens/recommend_page.dart';
 import 'package:nm_recommender/screens/suggestion_page.dart';
+import 'package:nm_recommender/widgets/navbar.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -15,18 +16,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => MovieProvider())
-        ],
+        providers: [ChangeNotifierProvider(create: (_) => MovieProvider())],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: "N&MRecommender",
           initialRoute: '/start_screen',
           routes: {
-            '/start_screen':(context) => const SuggestPage(),
+            '/start_screen': (context) => const SuggestPage(),
             '/login': (context) => const LoginPage(),
             '/recommend': (context) => const RecommendPage(),
-            '/detail': (context) => Container()
+            '/detail': (context) => Container(),
+            '/navbar': (context) => const Navbar()
           },
           home: SafeArea(
               child: LoginPage(

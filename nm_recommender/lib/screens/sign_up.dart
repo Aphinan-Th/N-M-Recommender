@@ -16,9 +16,9 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeColor.white,
+      backgroundColor: ThemeColor.primaryBg,
       appBar: AppBar(
-        backgroundColor: ThemeColor.white,
+        backgroundColor: ThemeColor.primaryBg,
         elevation: 0,
         leading: GestureDetector(
           child: const Icon(
@@ -71,11 +71,9 @@ class _EditPictureState extends State<EditPicture> {
             profileImage: '',
           ),
         ),
-        Container(
-          child: const Icon(
-            Icons.add_circle,
-            color: ThemeColor.black,
-          ),
+        const Icon(
+          Icons.add_circle,
+          color: ThemeColor.black,
         ),
       ],
     );
@@ -110,12 +108,12 @@ class _DetailInfoState extends State<DetailInfo> {
   Widget build(BuildContext context) {
     final screenW = MediaQuery.of(context).size.width;
     debugPrint(screenW.toString());
-    return Container(
+    return SizedBox(
       height: 380,
       child: ListView.builder(
         itemCount: detailInfo.length,
         itemBuilder: (context, index) {
-          return Container(
+          return SizedBox(
             width: MediaQuery.of(context).size.width,
             child: PlatformDetail(
               num: index + 1,
@@ -195,16 +193,14 @@ class SignUpButton extends StatefulWidget {
 class _SignUpButtonState extends State<SignUpButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Button(buttonName: "Log in",
-      textColor: ThemeColor.black,
-      bgColor: ThemeColor.white,
-      width: 330, height: 40,
-      callBack: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Navbar(),),);
-      },)
-    );
+    return Button(buttonName: "Sign Up",
+    textColor: ThemeColor.black,
+    bgColor: ThemeColor.white,
+    width: 310, height: 50,
+    callBack: () {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const Navbar()));
+    },);
   }
 }
 
