@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nm_recommender/providers/movie_provider.dart';
 import 'package:nm_recommender/screens/login_page.dart';
 import 'package:nm_recommender/screens/recommend_page.dart';
+import 'package:nm_recommender/screens/suggestion_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,8 +21,9 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: "N&MRecommender",
-          initialRoute: '/',
+          initialRoute: '/start_screen',
           routes: {
+            '/start_screen':(context) => const SuggestPage(),
             '/login': (context) => const LoginPage(),
             '/recommend': (context) => const RecommendPage(),
             '/detail': (context) => Container()

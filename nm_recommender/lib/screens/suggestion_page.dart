@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nm_recommender/assets/style.dart';
 import 'package:nm_recommender/screens/login_page.dart';
 import 'package:nm_recommender/widgets/button.dart';
-import 'package:nm_recommender/screens/movie_page.dart';
 import 'package:nm_recommender/widgets/navbar.dart';
 
 class SuggestPage extends StatelessWidget {
@@ -12,14 +11,12 @@ class SuggestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
-            TopOfSuggestPage(),
-            ButtonOfSuggestPage()
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: const [
+          TopOfSuggestPage(),
+          ButtonOfSuggestPage()
+        ],
       ),
     );
   }
@@ -42,7 +39,7 @@ class TopOfSuggestPage extends StatelessWidget {
                 fontFamily: "outfit"),
           ),
         ),
-        PageInfo(),
+        const PageInfo(),
       ],
     );
   }
@@ -118,13 +115,13 @@ class _PageInfoState extends State<PageInfo> {
   Widget build(BuildContext context) {
     final screenW = MediaQuery.of(context).size.width;
     debugPrint(screenW.toString());
-    return Container(
+    return SizedBox(
       height: 500,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: pageInfo.length,
         itemBuilder: (context, index) {
-          return Container(
+          return SizedBox(
             width: MediaQuery.of(context).size.width,
             child: TemplatePage(
               image: pageInfo[index + 1]!["image"]!,
@@ -152,7 +149,7 @@ class ButtonOfSuggestPage extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
             },
             textColor: ThemeColor.black),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Button(buttonName: "Continue with guest",
             bgColor: ThemeColor.primary,
             width: 300, height: 40,
