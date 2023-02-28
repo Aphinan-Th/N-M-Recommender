@@ -16,9 +16,9 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeColor.white,
+      backgroundColor: ThemeColor.primaryBg,
       appBar: AppBar(
-        backgroundColor: ThemeColor.white,
+        backgroundColor: ThemeColor.primaryBg,
         elevation: 0,
         leading: GestureDetector(
           child: const Icon(
@@ -195,16 +195,14 @@ class SignUpButton extends StatefulWidget {
 class _SignUpButtonState extends State<SignUpButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Button(buttonName: "Log in",
-      textColor: ThemeColor.black,
-      bgColor: ThemeColor.white,
-      width: 330, height: 40,
-      callBack: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Navbar(),),);
-      },)
-    );
+    return Button(buttonName: "Sign Up",
+    textColor: ThemeColor.black,
+    bgColor: ThemeColor.white,
+    width: 310, height: 50,
+    callBack: () {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const Navbar()));
+    },);
   }
 }
 

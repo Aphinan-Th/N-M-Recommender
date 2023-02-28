@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: const EdgeInsets.only(bottom: 24),
                           child: text14('N&M Recommender'),
                         ),
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.all(10.0),
                           child: CreateTextField(
                             hintText: 'Username',
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                             icon: Icons.clear,
                           ),
                         ),
-                        const Padding(
+                        Padding(
                             padding: EdgeInsets.all(10.0),
                             child: CreateTextField(
                               hintText: 'Password',
