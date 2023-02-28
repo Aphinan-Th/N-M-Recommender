@@ -9,6 +9,11 @@ class NovelPage extends StatefulWidget {
 
 class _NovelPageState extends State<NovelPage> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

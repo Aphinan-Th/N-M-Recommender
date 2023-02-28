@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nm_recommender/widgets/navbar.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,13 +19,8 @@ class _LoginPageState extends State<LoginPage> {
           height: 50,
           decoration: BoxDecoration(
               color: Colors.grey[200], borderRadius: BorderRadius.circular(10)),
-          child: Center(
-            child: Text(
-              "Login",
-              style: GoogleFonts.kanit(
-                  textStyle: const TextStyle(
-                      fontSize: 30, fontWeight: FontWeight.bold)),
-            ),
+          child: const Center(
+            child: Text("Login"),
           ),
         ),
       )),
