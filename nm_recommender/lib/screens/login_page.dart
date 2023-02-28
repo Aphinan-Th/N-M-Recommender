@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nm_recommender/screens/sign_up.dart';
+import 'package:nm_recommender/screens/suggestion_page.dart';
 import 'package:nm_recommender/widgets/avatar.dart';
 import 'package:nm_recommender/widgets/navbar.dart';
 import '../assets/style.dart';
@@ -27,7 +29,11 @@ class _LoginPageState extends State<LoginPage> {
               color: ThemeColor.black,
             ),
             onTap: () {
-              Navigator.pop(context); //Welcome Page
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const SuggestPage())); //Welcome Page
             },
           ),
           title: text24('Login'),
@@ -134,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Navbar()));
+                                      builder: (context) => const SignUp()));
                             },
                             textColor: ThemeColor.white,
                           ),

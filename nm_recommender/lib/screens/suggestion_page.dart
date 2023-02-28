@@ -1,165 +1,125 @@
 import 'package:flutter/material.dart';
 import 'package:nm_recommender/assets/style.dart';
-import 'package:nm_recommender/screens/login_page.dart';
-import 'package:nm_recommender/widgets/button.dart';
-import 'package:nm_recommender/widgets/navbar.dart';
+import 'package:nm_recommender/widgets/first_screen/slider_page.dart';
 
-class SuggestPage extends StatelessWidget {
-  const SuggestPage({Key? key}) : super(key: key);
+import '../widgets/first_screen/bottom_suggest.dart';
+import '../widgets/first_screen/suggest_template.dart';
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: const [
-          TopOfSuggestPage(),
-          ButtonOfSuggestPage()
-        ],
-      ),
-    );
-  }
-}
-
-class TopOfSuggestPage extends StatelessWidget {
-  const TopOfSuggestPage({Key? key}) : super(key: key);
+class SuggestPage extends StatefulWidget {
+  const SuggestPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          alignment: Alignment.topLeft,
-          margin: const EdgeInsets.only(left: 30),
-          child: const Text("Welcome",
-            style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 30,
-                fontFamily: "outfit"),
-          ),
-        ),
-        const PageInfo(),
-      ],
-    );
-  }
+  State<SuggestPage> createState() => _SuggestPageState();
 }
 
-class TemplatePage extends StatelessWidget {
-  final String image;
-  final String sectionName;
-  final String description;
-  const TemplatePage({Key? key, required this.sectionName, required this.image, required this.description}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(right: 13),
-          child: Image.network(image),
-        ),
-        Container(
-          alignment: Alignment.topLeft,
-          margin: const EdgeInsets.only(left: 30),
-          child: Text(sectionName,
-            style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 24,
-                fontFamily: "outfit"),
-          ),
-        ),
-        Container(
-          alignment: Alignment.topLeft,
-          margin: const EdgeInsets.only(top: 10, left: 30, right: 40),
-          child: Text(description,
-            style: const TextStyle(
-                fontWeight: FontWeight.w300,
-                fontSize: 14,
-                fontFamily: "outfit"),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class PageInfo extends StatefulWidget {
-  const PageInfo({Key? key}) : super(key: key);
-
-  @override
-  State<PageInfo> createState() => _PageInfoState();
-}
-
-class _PageInfoState extends State<PageInfo> {
+class _SuggestPageState extends State<SuggestPage> {
+  final PageController _pageController = PageController();
   var pageInfo = {
     1: {
-      "image": "https://img.freepik.com/premium-vector/people-airport-terminal-infographics-elements-travel-concept-flat-vector-set_580420-2292.jpg?w=740",
+      "image":
+          "https://img.freepik.com/premium-vector/people-airport-terminal-infographics-elements-travel-concept-flat-vector-set_580420-2292.jpg?w=740",
       "sectionName": "Suggestions",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "description":
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
     2: {
-      "image": "https://img.freepik.com/premium-vector/people-airport-terminal-infographics-elements-travel-concept-flat-vector-set_580420-2290.jpg?w=740",
+      "image":
+          "https://img.freepik.com/premium-vector/people-airport-terminal-infographics-elements-travel-concept-flat-vector-set_580420-2290.jpg?w=740",
       "sectionName": "Favourites",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "description":
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
     3: {
-      "image": "https://img.freepik.com/premium-vector/people-airport-terminal-infographics-elements-travel-concept-flat-vector-set_580420-2300.jpg?w=740",
+      "image":
+          "https://img.freepik.com/premium-vector/people-airport-terminal-infographics-elements-travel-concept-flat-vector-set_580420-2300.jpg?w=740",
       "sectionName": "Reviews",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "description":
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
   };
+  image(index) => pageInfo[index + 1]?["image"]!;
+  sectionName(index) => pageInfo[index + 1]?["sectionName"]!;
+  description(index) => pageInfo[index + 1]?["description"]!;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenW = MediaQuery.of(context).size.width;
-    debugPrint(screenW.toString());
-    return SizedBox(
-      height: 500,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: pageInfo.length,
-        itemBuilder: (context, index) {
-          return SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: TemplatePage(
-              image: pageInfo[index + 1]!["image"]!,
-              sectionName: pageInfo[index + 1]!["sectionName"]!,
-              description: pageInfo[index + 1]!["description"]!,
-            ),
-          );
-        },
-      ),
-    );
+    final screenH = MediaQuery.of(context).size.height;
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            body: SafeArea(
+                child: Container(
+                    color: ThemeColor.white,
+                    child: Stack(children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        margin: const EdgeInsets.only(left: 30, top: 24),
+                        child: const Text(
+                          "Welcome",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 30,
+                              fontFamily: "outfit"),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
+                        child: PageView(
+                          controller: _pageController,
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 65),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: TemplatePage(
+                                  image: image(0)!,
+                                  sectionName: sectionName(0)!,
+                                  description: description(0)!,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 65),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: TemplatePage(
+                                  image: image(1)!,
+                                  sectionName: sectionName(1)!,
+                                  description: description(1)!,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 65),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: TemplatePage(
+                                  image: image(2)!,
+                                  sectionName: sectionName(2)!,
+                                  description: description(2)!,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                          top: screenH * 0.75,
+                          left: screenW * 0.5 - 40,
+                          child: SliderPage(controller: _pageController)),
+                      Positioned(
+                          top: screenH * 0.8,
+                          left: screenW * 0.5 - 150,
+                          child: const ButtonOfSuggestPage())
+                    ])))));
   }
 }
-
-class ButtonOfSuggestPage extends StatelessWidget {
-  const ButtonOfSuggestPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Button(buttonName: "Login",
-            bgColor: ThemeColor.primaryBg,
-            width: 300, height: 40,
-            callBack: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
-            },
-            textColor: ThemeColor.black),
-        const SizedBox(height: 20),
-        Button(buttonName: "Continue with guest",
-            bgColor: ThemeColor.primary,
-            width: 300, height: 40,
-            callBack: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Navbar()));
-            },
-            textColor: ThemeColor.white),
-      ],
-
-    );
-  }
-}
-

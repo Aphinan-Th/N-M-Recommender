@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
-typedef CallBack = void Function();
+import 'package:nm_recommender/assets/style.dart';
 
 class Button extends StatefulWidget {
   final String buttonName;
   final Color bgColor, textColor;
   final double? width;
   final double height;
-  final CallBack callBack;
+  final VoidCallback callBack;
   Widget? textWithStyle;
   Button(
       {Key? key,
@@ -38,9 +37,8 @@ class _ButtonState extends State<Button> {
             borderRadius: BorderRadius.circular(20.0),
             boxShadow: const [
               BoxShadow(
-                  color: Colors.black54, blurRadius: 3.0, spreadRadius: 0)
-            ]
-        ),
+                  color: ThemeColor.shadow, blurRadius: 4, offset: Offset(0, 2))
+            ]),
         child: Center(
           child: widget.textWithStyle ??
               Text(widget.buttonName,
