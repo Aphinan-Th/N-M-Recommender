@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nm_recommender/screens/sign_up.dart';
 import 'package:nm_recommender/widgets/avatar.dart';
 import 'package:nm_recommender/widgets/navbar.dart';
 import '../assets/style.dart';
@@ -134,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Navbar()));
+                                      builder: (context) => const SignUp()));
                             },
                             textColor: ThemeColor.white,
                           ),

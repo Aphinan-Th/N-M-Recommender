@@ -41,9 +41,7 @@ class _SignUpState extends State<SignUp> {
           DetailInfo(),
           SignUpButton()
         ],
-
       )
-      //DetailInfo(),
     );
   }
 }
@@ -199,7 +197,7 @@ class _SignUpButtonState extends State<SignUpButton> {
       child: Button(buttonName: "Log in",
       textColor: ThemeColor.black,
       bgColor: ThemeColor.white,
-      width: 330, height: 40,
+      width: 333.2, height: 50,
       callBack: () {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const Navbar(),),);
