@@ -4,6 +4,7 @@ import 'package:nm_recommender/screens/about_page.dart';
 import 'package:nm_recommender/screens/contact_page.dart';
 import 'package:nm_recommender/screens/login_page.dart';
 import 'package:nm_recommender/screens/setting_page.dart';
+import 'package:nm_recommender/screens/suggestion_page.dart';
 import 'package:nm_recommender/widgets/button.dart';
 
 class AccountPage extends StatefulWidget {
@@ -143,7 +144,7 @@ class _LogoutButtonState extends State<LogoutButton> {
             bgColor: ThemeColor.white,
             width: 333.2, height: 50,
             callBack: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SuggestPage()));
             },
             textColor: ThemeColor.black,
           ),
