@@ -14,7 +14,8 @@ import (
 
 type IUserRepository interface {
 	GetAllUser() ([]model.User, error)
-	InsertUser(user model.User) (model.User, error)
+	SignIn(user model.User) (model.User, error)
+	LogIn(user model.UserLogin) (model.UserLogin, error)
 }
 
 type UserRepository struct {
@@ -62,12 +63,22 @@ func (repo *UserRepository) GetAllUser() ([]model.User, error) {
 	return users, nil
 }
 
-func (repo *UserRepository) InsertUser(user model.User) (model.User, error) {
+func (repo *UserRepository) SignIn(user model.User) (model.User, error) {
 	result, err := repo.getCollection().InsertOne(context.TODO(), user)
 	if err != nil {
 		return model.User{}, err
 	}
 
 	user.ID = result.InsertedID.(primitive.ObjectID)
+	return user, err
+}
+
+func (repo *UserRepository) LogIn(user model.UserLogin) (model.UserLogin, error) {
+	query := bson.D{{}}
+	cursor, err := repo.getCollection().Find(context.TODO(), query)
+	if err != nil {
+		return model.UserLogin{}, err
+	}
+	log.Println(cursor)
 	return user, err
 }

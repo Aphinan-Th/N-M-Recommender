@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nm_recommender/model/tmdb-model.dart';
 import 'package:nm_recommender/providers/movie_provider.dart';
 import 'package:nm_recommender/screens/login_page.dart';
 import 'package:nm_recommender/screens/recommend_page.dart';
