@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nm_recommender/assets/style.dart';
 import 'package:nm_recommender/screens/about_page.dart';
 import 'package:nm_recommender/screens/contact_page.dart';
+import 'package:nm_recommender/screens/login_page.dart';
 import 'package:nm_recommender/screens/setting_page.dart';
+import 'package:nm_recommender/widgets/button.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -21,7 +23,15 @@ class _AccountPageState extends State<AccountPage> {
         backgroundColor: ThemeColor.primaryBg,
         title: const Text("My Profile", style: TextStyle(color: ThemeColor.black),),
       ),
-      body: AccountListInfo(),
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AccountListInfo(),
+            const LogoutButton()
+          ],
+        ),
+      ),
     );
   }
 }
@@ -112,6 +122,33 @@ class _AccountListViewState extends State<AccountListView> {
                       builder: (context) => const ContactPage()))
                 }
           },
+    );
+  }
+}
+
+class LogoutButton extends StatefulWidget {
+  const LogoutButton({Key? key}) : super(key: key);
+
+  @override
+  State<LogoutButton> createState() => _LogoutButtonState();
+}
+
+class _LogoutButtonState extends State<LogoutButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(padding: EdgeInsets.only(bottom: 20),
+          child: Button(buttonName: "Log out",
+            bgColor: ThemeColor.white,
+            width: 333.2, height: 50,
+            callBack: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
+            },
+            textColor: ThemeColor.black,
+          ),
+        ),
+      ],
     );
   }
 }
