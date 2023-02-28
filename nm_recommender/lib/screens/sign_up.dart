@@ -9,12 +9,18 @@ class SignUp extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Sign Up"),
       ),
-      body: DetailInfo(),
+      body: Column(
+        children: [
+          EditPicture(),
+          DetailInfo(),
+        ],
+      )
+      //DetailInfo(),
     );
   }
 }
 
-//
+// Profile Picture can change function
 class EditPicture extends StatefulWidget {
   const EditPicture({Key? key}) : super(key: key);
 
@@ -25,10 +31,23 @@ class EditPicture extends StatefulWidget {
 class _EditPictureState extends State<EditPicture> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      margin: EdgeInsets.only(top: 20, bottom: 10),
+      width: 160,
+      height: 160,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.blue,
+      ),
+      child: const Icon(
+        Icons.camera_alt,
+        color: Colors.white,
+      ),
+    );
   }
 }
 
+// detail of 3 Text field
 class DetailInfo extends StatefulWidget {
   const DetailInfo({Key? key}) : super(key: key);
 
@@ -73,7 +92,7 @@ class _DetailInfoState extends State<DetailInfo> {
     );
   }
 }
-
+// platform detail use for 3 text field
 class PlatformDetail extends StatefulWidget {
   const PlatformDetail({Key? key, required int this.num, required this.info,}) : super(key: key);
 
@@ -127,5 +146,23 @@ class _PlatformDetailState extends State<PlatformDetail> {
     );
   }
 }
+
+// Button
+class SignUpButton extends StatefulWidget {
+  const SignUpButton({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpButton> createState() => _SignUpButtonState();
+}
+
+class _SignUpButtonState extends State<SignUpButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+    );
+  }
+}
+
 
 
