@@ -8,6 +8,7 @@ class Button extends StatefulWidget {
   final double height;
   final VoidCallback callBack;
   Widget? textWithStyle;
+  final NetworkImage? icon;
   Button(
       {Key? key,
       required this.buttonName,
@@ -16,7 +17,8 @@ class Button extends StatefulWidget {
       required this.height,
       required this.callBack,
       required this.textColor,
-      this.textWithStyle})
+      this.textWithStyle,
+      this.icon})
       : super(key: key);
 
   @override
@@ -29,25 +31,35 @@ class _ButtonState extends State<Button> {
     return GestureDetector(
       onTap: widget.callBack,
       child: Container(
-        padding: const EdgeInsets.only(left: 10, right: 10),
-        width: widget.width,
-        height: widget.height,
-        decoration: BoxDecoration(
-            color: widget.bgColor,
-            borderRadius: BorderRadius.circular(20.0),
-            boxShadow: const [
-              BoxShadow(
-                  color: ThemeColor.shadow, blurRadius: 4, offset: Offset(0, 2))
-            ]),
-        child: Center(
-          child: widget.textWithStyle ??
-              Text(widget.buttonName,
-                  style: TextStyle(
-                      color: widget.textColor,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w400)),
-        ),
-      ),
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          width: widget.width,
+          height: widget.height,
+          decoration: BoxDecoration(
+              color: widget.bgColor,
+              borderRadius: BorderRadius.circular(20.0),
+              boxShadow: const [
+                BoxShadow(
+                    color: ThemeColor.shadow,
+                    blurRadius: 4,
+                    offset: Offset(0, 2))
+              ]),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Visibility(
+                visible: widget.icon != null ? true : false,
+                child: const Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Icon(Icons.g_mobiledata)),
+              ),
+              widget.textWithStyle ??
+                  Text(widget.buttonName,
+                      style: TextStyle(
+                          color: widget.textColor,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w400)),
+            ],
+          )),
     );
   }
 }

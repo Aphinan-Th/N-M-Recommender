@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nm_recommender/screens/sign_up.dart';
 import 'package:nm_recommender/screens/suggestion_page.dart';
 import 'package:nm_recommender/widgets/avatar.dart';
@@ -6,6 +7,7 @@ import 'package:nm_recommender/widgets/navbar.dart';
 import '../assets/style.dart';
 import '../widgets/button.dart';
 import '../widgets/text_field.dart';
+import 'google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -58,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: text14('N&M Recommender'),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: CreateTextField(
                             hintText: 'Username',
                             borderColor: ThemeColor.gray,
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         Padding(
-                            padding: EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: CreateTextField(
                               hintText: 'Password',
                               borderColor: ThemeColor.gray,
@@ -152,6 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: const EdgeInsets.all(0),
                           child: Button(
                             // useIcon: const Icon(Icons.abc),
+                            icon: const NetworkImage("https://icons8.com/icon/17949/google"),
                             buttonName: 'Sign in with Google',
                             bgColor: ThemeColor.white,
                             width: 230,
@@ -160,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Navbar()));
+                                      builder: (context) => const SignInDemo()));
                             },
                             textColor: ThemeColor.gray,
                           ),

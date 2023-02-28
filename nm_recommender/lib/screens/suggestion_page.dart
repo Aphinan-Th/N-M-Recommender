@@ -14,7 +14,7 @@ class SuggestPage extends StatefulWidget {
 
 class _SuggestPageState extends State<SuggestPage> {
   final PageController _pageController = PageController();
-  var pageInfo = {
+  final Map<int, Map<String, String>> pageInfo = {
     1: {
       "image":
           "https://img.freepik.com/premium-vector/people-airport-terminal-infographics-elements-travel-concept-flat-vector-set_580420-2292.jpg?w=740",
@@ -37,14 +37,28 @@ class _SuggestPageState extends State<SuggestPage> {
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
   };
-  image(index) => pageInfo[index + 1]?["image"]!;
-  sectionName(index) => pageInfo[index + 1]?["sectionName"]!;
-  description(index) => pageInfo[index + 1]?["description"]!;
+
+  _image(index) => pageInfo[index + 1]?["image"]!;
+  _sectionName(index) => pageInfo[index + 1]?["sectionName"]!;
+  _description(index) => pageInfo[index + 1]?["description"]!;
 
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  Widget _buildTemplatePage(int index) {
+    return Padding(
+        padding: const EdgeInsets.only(top: 65),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: TemplatePage(
+            image: _image(index)!,
+            sectionName: _sectionName(index)!,
+            description: _description(index)!,
+          ),
+        ));
   }
 
   @override
@@ -61,13 +75,7 @@ class _SuggestPageState extends State<SuggestPage> {
                       Container(
                         alignment: Alignment.topLeft,
                         margin: const EdgeInsets.only(left: 30, top: 24),
-                        child: const Text(
-                          "Welcome",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 30,
-                              fontFamily: "outfit"),
-                        ),
+                        child: title("Welcome"),
                       ),
                       Padding(
                         padding:
@@ -76,39 +84,9 @@ class _SuggestPageState extends State<SuggestPage> {
                           controller: _pageController,
                           scrollDirection: Axis.horizontal,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 65),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: TemplatePage(
-                                  image: image(0)!,
-                                  sectionName: sectionName(0)!,
-                                  description: description(0)!,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 65),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: TemplatePage(
-                                  image: image(1)!,
-                                  sectionName: sectionName(1)!,
-                                  description: description(1)!,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 65),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: TemplatePage(
-                                  image: image(2)!,
-                                  sectionName: sectionName(2)!,
-                                  description: description(2)!,
-                                ),
-                              ),
-                            ),
+                            _buildTemplatePage(0),
+                            _buildTemplatePage(1),
+                            _buildTemplatePage(2),
                           ],
                         ),
                       ),

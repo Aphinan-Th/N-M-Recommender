@@ -71,11 +71,9 @@ class _EditPictureState extends State<EditPicture> {
             profileImage: '',
           ),
         ),
-        Container(
-          child: const Icon(
-            Icons.add_circle,
-            color: ThemeColor.black,
-          ),
+        const Icon(
+          Icons.add_circle,
+          color: ThemeColor.black,
         ),
       ],
     );
@@ -110,12 +108,12 @@ class _DetailInfoState extends State<DetailInfo> {
   Widget build(BuildContext context) {
     final screenW = MediaQuery.of(context).size.width;
     debugPrint(screenW.toString());
-    return Container(
+    return SizedBox(
       height: 380,
       child: ListView.builder(
         itemCount: detailInfo.length,
         itemBuilder: (context, index) {
-          return Container(
+          return SizedBox(
             width: MediaQuery.of(context).size.width,
             child: PlatformDetail(
               num: index + 1,
