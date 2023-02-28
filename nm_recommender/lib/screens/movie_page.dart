@@ -17,7 +17,7 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
-  late Provider<MovieProvider> provider;
+  late MovieProvider provider;
   void onSearch(String value) {
     setState(() {});
   }
@@ -25,7 +25,7 @@ class _MoviePageState extends State<MoviePage> {
   @override
   void initState() {
     super.initState();
-    final provider = Provider.of<MovieProvider>(context, listen: false);
+    provider = Provider.of<MovieProvider>(context, listen: false);
     provider.fetchData();
     provider.fetchGenre();
   }
@@ -66,19 +66,19 @@ class _MoviePageState extends State<MoviePage> {
               isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
-            child: bold20("Top movie"),
+            child: bold20("Top Rate movie"),
           ),
           _buildScrollImage(popularResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
-            child: bold20("Top movie"),
+            child: bold20("Popular movie"),
           ),
           _buildScrollImage(popularResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
-            child: bold20("Top movie"),
+            child: bold20("Sci-Fi movie"),
           ),
           _buildScrollImage(popularResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),

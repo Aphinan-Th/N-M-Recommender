@@ -13,10 +13,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: ThemeColor.white,
+      color: ThemeColor.primaryBg,
       child: Center(
         child: CircularProgressIndicator(
-          color: ThemeColor.primary,
+          color: ThemeColor.secondary,
           value: widget.value,
         ),
       ),

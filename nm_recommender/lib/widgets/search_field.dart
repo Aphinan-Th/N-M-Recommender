@@ -29,7 +29,7 @@ class SearchField extends StatelessWidget {
               border: outlineInputBorder,
               enabledBorder: outlineInputBorder,
               focusedBorder: outlineInputBorder,
-              prefixIconColor: ThemeColor.primary,
+              prefixIconColor: ThemeColor.secondary,
               fillColor: ThemeColor.white),
           onChanged: (value) {
             onSearch(value.toLowerCase());
