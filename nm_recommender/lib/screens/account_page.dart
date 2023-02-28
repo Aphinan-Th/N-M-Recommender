@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nm_recommender/widgets/button.dart';
-
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
 

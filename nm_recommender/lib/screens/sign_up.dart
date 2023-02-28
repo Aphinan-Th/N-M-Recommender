@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nm_recommender/assets/style.dart';
 import 'package:nm_recommender/screens/login_page.dart';
-import 'package:nm_recommender/screens/movie_page.dart';
 import 'package:nm_recommender/widgets/avatar.dart';
 import 'package:nm_recommender/widgets/button.dart';
 import 'package:nm_recommender/widgets/navbar.dart';
 import '../widgets/text_field.dart';
-import 'package:nm_recommender/assets/style.dart';
-
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -35,20 +32,14 @@ class _SignUpState extends State<SignUp> {
             );
           },
         ),
-        title: Text("Sign Up",
+        title: const Text("Sign Up",
         style: TextStyle(color: ThemeColor.black, fontSize: 25),),
       ),
       body: Column(
-        children: [
-          Container(
-            child: EditPicture(),
-          ),
-          Container(
-            child: DetailInfo(),
-          ),
-          Container(
-            child: SignUpButton(),
-          )
+        children: const [
+          EditPicture(),
+          DetailInfo(),
+          SignUpButton()
         ],
 
       )
@@ -166,7 +157,7 @@ class _PlatformDetailState extends State<PlatformDetail> {
           Column(
             children: [
               Container(
-                margin: EdgeInsets.only(left: 30, bottom: 10, top: 20),
+                margin: const EdgeInsets.only(left: 30, bottom: 10, top: 20),
                 alignment: Alignment.centerLeft,
                 child: Text(headDetail,
                   style: const TextStyle(
@@ -176,7 +167,7 @@ class _PlatformDetailState extends State<PlatformDetail> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 40, right: 40),
+                margin: const EdgeInsets.only(left: 40, right: 40),
                 alignment: Alignment.centerLeft,
                 child: CreateTextField(
                   hintText: hintTextField,
