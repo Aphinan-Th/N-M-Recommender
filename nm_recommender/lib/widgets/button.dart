@@ -7,15 +7,15 @@ class Button extends StatefulWidget {
   final Color bgColor, textColor;
   final double width, height;
   final CallBack callBack;
-  const Button(
-      {Key? key,
-      required this.buttonName,
-      required this.bgColor,
-      required this.width,
-      required this.height,
-      required this.callBack,
-      required this.textColor})
-      : super(key: key);
+  const Button({
+    Key? key,
+    required this.buttonName,
+    required this.bgColor,
+    required this.width,
+    required this.height,
+    required this.callBack,
+    required this.textColor,
+  }) : super(key: key);
 
   @override
   State<Button> createState() => _ButtonState();
@@ -37,12 +37,11 @@ class _ButtonState extends State<Button> {
                   color: Colors.black54, blurRadius: 1.5, spreadRadius: 1.1)
             ]),
         child: Center(
-          child: Text(widget.buttonName,
-              style: TextStyle(
-                  color: widget.textColor,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w400)),
-        ),
+            child: Text(widget.buttonName,
+                style: TextStyle(
+                    color: widget.textColor,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w400))),
       ),
     );
   }
