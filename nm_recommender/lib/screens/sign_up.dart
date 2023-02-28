@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nm_recommender/assets/style.dart';
+import 'package:nm_recommender/widgets/avatar.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -31,18 +33,25 @@ class EditPicture extends StatefulWidget {
 class _EditPictureState extends State<EditPicture> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 20, bottom: 10),
-      width: 160,
-      height: 160,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.blue,
-      ),
-      child: const Icon(
-        Icons.camera_alt,
-        color: Colors.white,
-      ),
+    return Stack(
+      alignment: const Alignment(0.8, 0.7),
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 20, bottom: 10),
+          width: 160,
+          height: 160,
+          child: const Avatar(
+            radius: 80,
+            profileImage: '',
+          ),
+        ),
+        Container(
+          child: const Icon(
+            Icons.add_circle,
+            color: ThemeColor.black,
+          ),
+        ),
+      ],
     );
   }
 }
