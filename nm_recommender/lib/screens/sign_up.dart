@@ -14,6 +14,7 @@ class SignUp extends StatelessWidget {
   }
 }
 
+//
 class EditPicture extends StatefulWidget {
   const EditPicture({Key? key}) : super(key: key);
 
@@ -55,9 +56,20 @@ class _DetailInfoState extends State<DetailInfo> {
   Widget build(BuildContext context) {
     final screenW = MediaQuery.of(context).size.width;
     debugPrint(screenW.toString());
-    return PlatformDetail(
-      num: 1,
-      info: detailInfo,
+    return Container(
+      height: 500,
+      child: ListView.builder(
+        itemCount: detailInfo.length,
+        itemBuilder: (context, index) {
+          return Container(
+            width: MediaQuery.of(context).size.width,
+            child: PlatformDetail(
+              num: index + 1,
+              info: detailInfo,
+            ),
+          );
+        },
+      ),
     );
   }
 }
