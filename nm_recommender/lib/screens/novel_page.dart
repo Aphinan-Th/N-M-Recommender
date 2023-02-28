@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nm_recommender/widgets/avatar.dart';
-
-import '../widgets/text_field.dart';
 
 class NovelPage extends StatefulWidget {
   const NovelPage({super.key});
@@ -11,6 +8,11 @@ class NovelPage extends StatefulWidget {
 }
 
 class _NovelPageState extends State<NovelPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(

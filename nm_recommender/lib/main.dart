@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:nm_recommender/assets/style.dart';
+import 'package:nm_recommender/providers/movie_provider.dart';
 import 'package:nm_recommender/screens/login_page.dart';
+import 'package:nm_recommender/screens/recommend_page.dart';
+import 'package:nm_recommender/screens/suggestion_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +14,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "N&MRecommender",
-      home: SafeArea(
-          child: LoginPage(
-        key: key,
-      )),
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => MovieProvider())
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: "N&MRecommender",
+          initialRoute: '/start_screen',
+          routes: {
+            '/start_screen':(context) => const SuggestPage(),
+            '/login': (context) => const LoginPage(),
+            '/recommend': (context) => const RecommendPage(),
+            '/detail': (context) => Container()
+          },
+          home: SafeArea(
+              child: LoginPage(
+            key: key,
+          )),
+        ));
   }
 }

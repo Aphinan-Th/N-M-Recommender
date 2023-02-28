@@ -1,9 +1,4 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:nm_recommender/screens/movie_page.dart';
 import 'package:nm_recommender/widgets/avatar.dart';
 import 'package:nm_recommender/widgets/navbar.dart';
 import '../assets/style.dart';
