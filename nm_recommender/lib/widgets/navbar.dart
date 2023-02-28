@@ -47,6 +47,7 @@ class _NavbarState extends State<Navbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: ThemeColor.primaryBg,
         appBar: List<AppBar>.generate(
             4,
             (index) => AppBar(

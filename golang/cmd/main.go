@@ -27,6 +27,7 @@ func main() {
 	r.POST("/user", userhandler.PostUser)
 	r.GET("/tmdb-movie-info", tmdbhandler.GetMovieInfo)
 	r.GET("/tmdb-movie-popular/", tmdbhandler.GetMoviePopular)
+	r.GET("/tmdb-movie-recommend/", tmdbhandler.GetMovieRecommendationsPopular)
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
