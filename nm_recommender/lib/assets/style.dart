@@ -26,6 +26,16 @@ class ThemeText {
       fontSize: 16, fontWeight: FontWeight.bold, color: ThemeColor.white);
   static TextStyle bw60020 = const TextStyle(
       fontSize: 20, fontWeight: FontWeight.bold, color: ThemeColor.black);
+  static TextStyle bw60024 = const TextStyle(
+      fontSize: 24, fontWeight: FontWeight.w600, color: ThemeColor.black);
+  static TextStyle bw60014 = const TextStyle(
+      fontSize: 14, fontWeight: FontWeight.w600, color: ThemeColor.black);
+  static TextStyle gw60014 = const TextStyle(
+      fontSize: 14, fontWeight: FontWeight.w600, color: ThemeColor.gray);
+  static TextStyle aw60014 = const TextStyle(
+      fontSize: 14, fontWeight: FontWeight.w600, color: ThemeColor.alternate);
+  static TextStyle gw60016 = const TextStyle(
+      fontSize: 16, fontWeight: FontWeight.w600, color: ThemeColor.gray);
 }
 
 Widget title(text) => Text(text, style: ThemeText.bw60032);
@@ -35,3 +45,8 @@ Widget buttonBlack(text) => Text(text, style: ThemeText.bw40016);
 Widget buttonWhite(text) => Text(text, style: ThemeText.ww40016);
 Widget bold16(text) => Text(text, style: ThemeText.ww60016);
 Widget bold20(text) => Text(text, style: ThemeText.bw60020);
+Widget text14(text) => Text(text, style: ThemeText.bw60014);
+Widget text24(text) => Text(text, style: ThemeText.bw60024);
+Widget textgw60014(text) => Text(text, style: ThemeText.gw60014);
+Widget textaw60014(text) => Text(text, style: ThemeText.aw60014);
+Widget or(text) => Text(text, style: ThemeText.gw60016);
