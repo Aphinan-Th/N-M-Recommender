@@ -143,7 +143,7 @@ class ButtonOfSuggestPage extends StatelessWidget {
     return Column(
       children: [
         Button(buttonName: "Login",
-            bgColor: ThemeColor.white,
+            bgColor: ThemeColor.primaryBg,
             width: 300, height: 40,
             callBack: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
