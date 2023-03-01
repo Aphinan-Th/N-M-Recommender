@@ -60,6 +60,7 @@ class _ProfilePicState extends State<ProfilePic> {
         Container(
           margin: const EdgeInsets.only(left: 20, top: 10),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 alignment: Alignment.topLeft,
