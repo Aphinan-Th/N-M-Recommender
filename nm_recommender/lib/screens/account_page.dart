@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nm_recommender/assets/style.dart';
 import 'package:nm_recommender/screens/about_page.dart';
 import 'package:nm_recommender/screens/contact_page.dart';
-import 'package:nm_recommender/screens/login_page.dart';
 import 'package:nm_recommender/screens/setting_page.dart';
 import 'package:nm_recommender/screens/suggestion_page.dart';
+import 'package:nm_recommender/widgets/avatar.dart';
 import 'package:nm_recommender/widgets/button.dart';
 
 class AccountPage extends StatefulWidget {
@@ -19,15 +19,16 @@ class _AccountPageState extends State<AccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ThemeColor.primaryBg,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: ThemeColor.primaryBg,
-        title: const Text("My Profile", style: TextStyle(color: ThemeColor.black),),
-      ),
       body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            Container(
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(left: 20, top: 10),
+              child: title("My Profile"),
+            ),
+            ProfilePic(),
             AccountListInfo(),
             const LogoutButton()
           ],
@@ -37,6 +38,45 @@ class _AccountPageState extends State<AccountPage> {
   }
 }
 
+class ProfilePic extends StatefulWidget {
+  const ProfilePic({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePic> createState() => _ProfilePicState();
+}
+
+class _ProfilePicState extends State<ProfilePic> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(left: 20, top: 10),
+          child: const Avatar(
+          radius: 50,
+          profileImage: '',
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(left: 20, top: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: text14("Phattharani"),
+              ),
+              body("phat.thongsriphong@kkumail.com"),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+
+//Account List Info
 class AccountListInfo extends StatefulWidget {
   const AccountListInfo({Key? key}) : super(key: key);
 
@@ -106,6 +146,7 @@ class _AccountListViewState extends State<AccountListView> {
   @override
   Widget build(BuildContext context) {
     return ListTile(title: Text(listName,),
+          contentPadding: const EdgeInsets.only(left: 20, right: 20),
           leading: Icon(leadingIcon, color: ThemeColor.primary, size: 24,),
           trailing: const Icon(Icons.arrow_forward_ios, size: 13,),
           onTap: () =>
@@ -127,6 +168,7 @@ class _AccountListViewState extends State<AccountListView> {
   }
 }
 
+// log out button
 class LogoutButton extends StatefulWidget {
   const LogoutButton({Key? key}) : super(key: key);
 
@@ -153,7 +195,3 @@ class _LogoutButtonState extends State<LogoutButton> {
     );
   }
 }
-
-
-
-

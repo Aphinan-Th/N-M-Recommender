@@ -7,7 +7,8 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Setting Page"),
+        centerTitle: true,
+        title: const Text("Setting"),
       ),
       body: const Center(
         child: Text("Setting Page"),

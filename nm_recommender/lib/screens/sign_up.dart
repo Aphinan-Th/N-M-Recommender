@@ -203,6 +203,3 @@ class _SignUpButtonState extends State<SignUpButton> {
     },);
   }
 }
-
-
-
