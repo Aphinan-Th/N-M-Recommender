@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nm_recommender/assets/style.dart';
 import 'package:nm_recommender/screens/term_of_use.dart';
 
 class AboutPage extends StatelessWidget {
@@ -11,7 +10,7 @@ class AboutPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("About"),
       ),
-      body: AboutList(),
+      body: const AboutList(),
     );
   }
 }

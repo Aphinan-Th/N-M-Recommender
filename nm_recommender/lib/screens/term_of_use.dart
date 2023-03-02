@@ -10,15 +10,13 @@ class TermOfUsePage extends StatelessWidget {
         centerTitle: true,
         title: const Text("Term of Use",),
       ),
-      body: Container(
-        child: dataTerm(),
-      )
+      body: const DataTerm()
     );
   }
 }
 
-class dataTerm extends StatelessWidget {
-  const dataTerm({Key? key}) : super(key: key);
+class DataTerm extends StatelessWidget {
+  const DataTerm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,7 @@ class dataTerm extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.all(40),
-          child: Text("This project is created by the students of the Khon Kaen University "
+          child: const Text("This project is created by the students of the Khon Kaen University "
                       "for the course Mobile Application Development. The project is a mobile application "
                       "that recommends movies and novels to the user based on their preferences. "
                       "The project is created using Flutter and Dart.")

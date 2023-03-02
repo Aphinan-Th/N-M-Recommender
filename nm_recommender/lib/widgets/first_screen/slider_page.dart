@@ -3,7 +3,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SliderPage extends StatelessWidget {
   final PageController controller;
-  const SliderPage({super.key, required this.controller});
+  const SliderPage({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

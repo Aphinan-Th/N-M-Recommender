@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:nm_recommender/assets/style.dart';
+import 'package:nm_recommender/screens/recommend_page.dart';
 
 class NextButton extends StatelessWidget {
   final String navigateTo;
-  const NextButton({super.key, required this.navigateTo});
+  const NextButton({Key? key, required this.navigateTo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, navigateTo),
+      onTap: () => Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const RecommendPage())),
       child: Container(
           width: 50,
           height: 50,

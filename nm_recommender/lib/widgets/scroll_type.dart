@@ -12,35 +12,27 @@ class ScrollType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 24,
-                ),
-                Row(
-                  children: List.generate(
-                    type.length,
-                    (index) => Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: Button(
-                        buttonName: type[index],
-                        bgColor: ThemeColor.primary,
-                        height: 30,
-                        callBack: callBack,
-                        textColor: ThemeColor.white,
-                        width: null,
-                        textWithStyle: bold16(type[index]),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            )),
-      ],
+    return Container(
+      padding: const EdgeInsets.only(left: 12),
+      height: 30,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: type.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(left: 12),
+            child: Button(
+              buttonName: type[index],
+              bgColor: ThemeColor.primary,
+              height: 30,
+              callBack: callBack,
+              textColor: ThemeColor.white,
+              width: null,
+              textWithStyle: bold16(type[index]),
+            ),
+          );
+        },
+      ),
     );
   }
 }

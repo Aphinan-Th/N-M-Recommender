@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nm_recommender/assets/style.dart';
 import 'package:nm_recommender/model/tmdb-model.dart';
+import 'package:nm_recommender/screens/recommend_page.dart';
 import 'package:nm_recommender/widgets/loading.dart';
 import 'package:nm_recommender/widgets/scroll_image.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,7 @@ class _MoviePageState extends State<MoviePage> {
                 genres.length,
                 (index) => genres[index].name,
               ),
-              callBack: () => Navigator.pushNamed(context, '/recommend'),
+              callBack: () =>  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RecommendPage())),
             ),
           ),
           Padding(
