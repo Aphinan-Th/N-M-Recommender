@@ -8,18 +8,28 @@ class MovieProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasError => _hasError;
   TmDbPopular? _tmDbPopular;
+  TmdbRecommend? _tmDbRecommend;
   TmDbGenres? _tmDbGenres;
+  TmdbUpcoming? _tmDbUpcoming;
+  TmdbTopRate? _tmdbTopRate;
   TmDbPopular? get tmDbPopular => _tmDbPopular;
   TmDbGenres? get tmDbGenres => _tmDbGenres;
+  TmdbRecommend? get tmDbRecommend => _tmDbRecommend;
+  TmdbUpcoming? get tmDbUpcoming => _tmDbUpcoming;
+  TmdbTopRate? get tmdbTopRate => _tmdbTopRate;
+
   int page = 0;
 
   Future<dynamic> fetchData() async {
     _isLoading = true;
     try {
-      if (_tmDbPopular == null) {
+      if (_tmDbPopular == null || _tmDbRecommend == null) {
         page++;
         _tmDbPopular = await getMoviePopular(page);
-        print(_tmDbPopular);
+        _tmDbRecommend = await getMovieRecommend(page);
+        _tmDbUpcoming = await getMovieUpcoming(page);
+        _tmdbTopRate = await getMovieTopRate(page);
+
         notifyListeners();
         _hasError = false;
       }
@@ -30,6 +40,7 @@ class MovieProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+  
 
   Future<dynamic> fetchGenre() async {
     _isLoading = true;

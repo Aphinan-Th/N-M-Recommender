@@ -146,3 +146,138 @@ class Genre {
         "name": name,
     };
 }
+
+// To parse this JSON data, do
+//
+//     final tmdbRecommend = tmdbRecommendFromJson(jsonString);
+
+TmdbRecommend tmdbRecommendFromJson(String str) => TmdbRecommend.fromJson(json.decode(str));
+
+String tmdbRecommendToJson(TmdbRecommend data) => json.encode(data.toJson());
+
+class TmdbRecommend {
+    TmdbRecommend({
+        required this.page,
+        required this.results,
+        required this.totalPages,
+        required this.totalResults,
+    });
+
+    int page;
+    List<Result> results;
+    int totalPages;
+    int totalResults;
+
+    factory TmdbRecommend.fromJson(Map<String, dynamic> json) => TmdbRecommend(
+        page: json["page"],
+        results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+        totalPages: json["total_pages"],
+        totalResults: json["total_results"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "page": page,
+        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "total_pages": totalPages,
+        "total_results": totalResults,
+    };
+}
+// To parse this JSON data, do
+//
+//     final tmdbUpcoming = tmdbUpcomingFromJson(jsonString);
+
+TmdbUpcoming tmdbUpcomingFromJson(String str) => TmdbUpcoming.fromJson(json.decode(str));
+
+String tmdbUpcomingToJson(TmdbUpcoming data) => json.encode(data.toJson());
+
+class TmdbUpcoming {
+    TmdbUpcoming({
+        required this.dates,
+        required this.page,
+        required this.results,
+        required this.totalPages,
+        required this.totalResults,
+    });
+
+    Dates dates;
+    int page;
+    List<Result> results;
+    int totalPages;
+    int totalResults;
+
+    factory TmdbUpcoming.fromJson(Map<String, dynamic> json) => TmdbUpcoming(
+        dates: Dates.fromJson(json["Dates"]),
+        page: json["Page"],
+        results: List<Result>.from(json["Results"].map((x) => Result.fromJson(x))),
+        totalPages: json["total_pages"],
+        totalResults: json["total_results"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "Dates": dates.toJson(),
+        "Page": page,
+        "Results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "total_pages": totalPages,
+        "total_results": totalResults,
+    };
+}
+
+class Dates {
+    Dates({
+        required this.minimum,
+        required this.maximum,
+    });
+
+    DateTime minimum;
+    DateTime maximum;
+
+    factory Dates.fromJson(Map<String, dynamic> json) => Dates(
+        minimum: DateTime.parse(json["Minimum"]),
+        maximum: DateTime.parse(json["Maximum"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "Minimum": "${minimum.year.toString().padLeft(4, '0')}-${minimum.month.toString().padLeft(2, '0')}-${minimum.day.toString().padLeft(2, '0')}",
+        "Maximum": "${maximum.year.toString().padLeft(4, '0')}-${maximum.month.toString().padLeft(2, '0')}-${maximum.day.toString().padLeft(2, '0')}",
+    };
+}
+
+// To parse this JSON data, do
+//
+//     final tmdbTopRate = tmdbTopRateFromJson(jsonString);
+
+TmdbTopRate tmdbTopRateFromJson(String str) => TmdbTopRate.fromJson(json.decode(str));
+
+String tmdbTopRateToJson(TmdbTopRate data) => json.encode(data.toJson());
+
+class TmdbTopRate {
+    TmdbTopRate({
+        required this.id,
+        required this.page,
+        required this.results,
+        required this.totalPages,
+        required this.totalResults,
+    });
+
+    int id;
+    int page;
+    List<Result> results;
+    int totalPages;
+    int totalResults;
+
+    factory TmdbTopRate.fromJson(Map<String, dynamic> json) => TmdbTopRate(
+        id: json["ID"],
+        page: json["Page"],
+        results: List<Result>.from(json["Results"].map((x) => Result.fromJson(x))),
+        totalPages: json["total_pages"],
+        totalResults: json["total_results"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "ID": id,
+        "Page": page,
+        "Results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "total_pages": totalPages,
+        "total_results": totalResults,
+    };
+}

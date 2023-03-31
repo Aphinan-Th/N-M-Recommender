@@ -37,8 +37,17 @@ class _MoviePageState extends State<MoviePage> {
     final isLoading = provider.isLoading;
     final genres = provider.tmDbGenres?.genres;
     final popularResults = provider.tmDbPopular?.results;
-    if (genres == null || popularResults == null || isLoading) {
-      return Center(child: LoadingScreen());
+    final recommendResults = provider.tmDbRecommend?.results;
+    final upcomingResults = provider.tmDbUpcoming?.results;
+    final topRateResults = provider.tmdbTopRate?.results;
+
+    if (genres == null ||
+        popularResults == null ||
+        recommendResults == null ||
+        upcomingResults == null ||
+        topRateResults == null ||
+        isLoading) {
+      return const Center(child: LoadingScreen());
     }
     return SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -52,7 +61,8 @@ class _MoviePageState extends State<MoviePage> {
                 genres.length,
                 (index) => genres[index].name,
               ),
-              callBack: () =>  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RecommendPage())),
+              callBack: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const RecommendPage())),
             ),
           ),
           Padding(
@@ -60,16 +70,16 @@ class _MoviePageState extends State<MoviePage> {
             child: bold20("Recommend"),
           ),
           _buildScrollImage(
-              popularResults,
+              recommendResults,
               const EdgeInsets.only(right: 24, left: 24, bottom: 12),
               150,
               200,
               isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
-            child: bold20("Top Rate movie"),
+            child: bold20("Upcoming movie"),
           ),
-          _buildScrollImage(popularResults,
+          _buildScrollImage(upcomingResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
@@ -79,9 +89,9 @@ class _MoviePageState extends State<MoviePage> {
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
-            child: bold20("Sci-Fi movie"),
+            child: bold20("Top rate movie "),
           ),
-          _buildScrollImage(popularResults,
+          _buildScrollImage(topRateResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
         ]));
   }

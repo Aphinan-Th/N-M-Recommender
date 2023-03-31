@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nm_recommender/providers/auth_provider.dart';
 import 'package:nm_recommender/providers/movie_provider.dart';
 import 'package:nm_recommender/screens/login_page.dart';
 import 'package:nm_recommender/screens/recommend_page.dart';
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [ChangeNotifierProvider(create: (_) => MovieProvider())],
+        providers: [
+          ChangeNotifierProvider(create: (_) => MovieProvider()),
+          ChangeNotifierProvider(create: (_) => AuthProvider())
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: "N&MRecommender",

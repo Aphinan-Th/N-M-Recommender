@@ -37,7 +37,7 @@ class _NovelPageState extends State<NovelPage> {
     final genres = provider.tmDbGenres?.genres;
     final popularResults = provider.tmDbPopular?.results;
     if (genres == null || popularResults == null || isLoading) {
-      return Center(child: LoadingScreen());
+      return const Center(child: LoadingScreen());
     }
     final List genreNovel = [
       'Romance',
