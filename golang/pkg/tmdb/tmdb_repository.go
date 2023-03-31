@@ -15,6 +15,8 @@ type ITMDbRepository interface {
 	GetMovieInfo(opt map[string]string) (*tmdb.Movie, error)
 	GetMoviePopular(opt map[string]string) (*tmdb.MoviePagedResults, error)
 	GetMovieRecommendations(id int, opt map[string]string) (*tmdb.MovieRecommendations, error)
+	GetMovieUpcoming(opt map[string]string) (*tmdb.MovieDatedResults, error)
+	GetMovieTopRated(opt map[string]string) (*tmdb.MoviePagedResults, error)
 }
 
 func getOptionsString(options map[string]string, availableOptions map[string]struct{}) string {
@@ -53,6 +55,16 @@ func (repo TMDbRepository) GetMoviePopular(opt map[string]string) (*tmdb.MoviePa
 
 func (repo TMDbRepository) GetMovieRecommendations(id int, opt map[string]string) (*tmdb.MovieRecommendations, error) {
 	result, err := tmdbAPI.GetMovieRecommendations(id, opt)
+	return result, err
+}
+
+func (repo TMDbRepository) GetMovieUpcoming(opt map[string]string) (*tmdb.MovieDatedResults, error) {
+	result, err := tmdbAPI.GetMovieUpcoming(opt)
+	return result, err
+}
+
+func (repo TMDbRepository) GetMovieTopRated(opt map[string]string) (*tmdb.MoviePagedResults, error) {
+	result, err := tmdbAPI.GetMovieTopRated(opt)
 	return result, err
 }
 

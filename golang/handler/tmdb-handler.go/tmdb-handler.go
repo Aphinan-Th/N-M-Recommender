@@ -57,3 +57,31 @@ func (handler *TMDbHandler) GetMovieRecommendationsPopular(c *gin.Context) {
 	}
 	c.JSON(200, result)
 }
+
+func (handler *TMDbHandler) GetMovieUpcoming(c *gin.Context) {
+	opt := make(map[string]string)
+	query := c.Query("page")
+	opt["page"] = query
+
+	result, err := handler.TMDbService.GetMovieUpcoming(opt)
+	if err != nil {
+		c.JSON(500, gin.H{
+			"massage": err.Error(),
+		})
+	}
+	c.JSON(200, result)
+}
+
+func (handler *TMDbHandler) GetMovieTopRated(c *gin.Context) {
+	opt := make(map[string]string)
+	query := c.Query("page")
+	opt["page"] = query
+
+	result, err := handler.TMDbService.GetMovieTopRated(opt)
+	if err != nil {
+		c.JSON(500, gin.H{
+			"massage": err.Error(),
+		})
+	}
+	c.JSON(200, result)
+}
