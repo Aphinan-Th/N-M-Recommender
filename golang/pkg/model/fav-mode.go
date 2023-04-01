@@ -24,10 +24,10 @@ func (r *MyFavorite) Marshal() ([]byte, error) {
 type MyFavorite struct {
 	ID       primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
 	UserID   string             `json:"userId"`
-	Favorite Favorite           `json:"Favorite"`
+	Favorite FavoriteDetail     `json:"Favorite"`
 }
 
-type Favorite struct {
+type FavoriteDetail struct {
 	Type string `json:"type"`
 	ID   int64  `json:"id"`
 }
