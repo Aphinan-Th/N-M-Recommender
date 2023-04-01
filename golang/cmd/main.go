@@ -11,6 +11,7 @@ import (
 	"time"
 
 	authhandler "github.com/aphinan633040184-9/golang-basic/handler/auth-handler.go"
+	favhandler "github.com/aphinan633040184-9/golang-basic/handler/fav-handler.go"
 	tmdbhandler "github.com/aphinan633040184-9/golang-basic/handler/tmdb-handler.go"
 	"github.com/aphinan633040184-9/golang-basic/middleware"
 	"github.com/gin-contrib/cors"
@@ -35,8 +36,10 @@ func main() {
 
 	auth_handler := authhandler.NewAuthHandler()
 	tmdb_handler := tmdbhandler.NewTMDbHandler()
+	fav_handler := favhandler.NewFavoriteHandler()
 	authRoute := v1.Group("/auth")
 	tmdbRoute := v1.Group("/tmdb")
+	favRoute := v1.Group("/my-favorite")
 
 	authRoute.POST("/login", auth_handler.Login)
 	authRoute.POST("/sign-up", auth_handler.SignUp)
@@ -49,6 +52,13 @@ func main() {
 	tmdbRoute.GET("/movie-recommend", tmdb_handler.GetMovieRecommendationsPopular)
 	tmdbRoute.GET("/movie-upcoming", tmdb_handler.GetMovieUpcoming)
 	tmdbRoute.GET("/movie-top-rate", tmdb_handler.GetMovieTopRated)
+	tmdbRoute.GET("/movie-genre", tmdb_handler.GetMovieGenres)
+	tmdbRoute.GET("/movie-by-genre", tmdb_handler.GetMovieByGenre)
+	tmdbRoute.GET("/movie-reviews", tmdb_handler.GetMovieReviews)
+
+	favRoute.GET("", fav_handler.GetFavoriteByUserId)
+	favRoute.POST("", fav_handler.PostFavorite)
+	favRoute.DELETE("", fav_handler.DeleteFavorite)
 
 	port := fmt.Sprintf(":%s", "8080")
 

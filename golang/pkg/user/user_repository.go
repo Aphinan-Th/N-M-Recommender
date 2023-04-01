@@ -120,28 +120,6 @@ func (repo *UserRepository) LogIn(user model.UserLogin) (model.Status, error) {
 	return status, err
 }
 
-// A function that will update the password of the user.
-
-// func (repo *UserRepository) ChangePassword(user model.ChangePassword) (model.Status, error) {
-// 	objID, err := primitive.ObjectIDFromHex(user.ID)
-// 	if err != nil {
-// 		return model.Status{Status: "Failed", ErrorString: "Invalid ID"}, err
-// 	}
-
-// 	filter := bson.M{"_id": objID}
-// 	update := bson.M{"$set": bson.M{"password": user.NewPassword}}
-
-// 	coll := repo.getCollection()
-// 	log.Printf("filter: %v, update: %v\n, coll: %v", filter, update, coll)
-
-// 	_, err = coll.UpdateByID(context.Background(), objID, update)
-// 	if err != nil {
-// 		return model.Status{Status: "Failed", ErrorString: "Something Wrong"}, err
-// 	}
-
-// 	return model.Status{Status: "Success", ErrorString: "nil"}, err
-// }
-
 func (repo *UserRepository) ChangePassword(user model.ChangePassword) (model.Status, error) {
 	id, err := primitive.ObjectIDFromHex(user.ID)
 	if err != nil {

@@ -8,26 +8,14 @@ import (
 
 var tmdbAPI *tmdb.TMDb
 
-const baseURL string = "https://api.themoviedb.org/3"
-const ApiKey string = "7d2b91f400ce0e8625786102fdf95451"
-
 type ITMDbRepository interface {
-	GetMovieInfo(opt map[string]string) (*tmdb.Movie, error)
+	GetMovieInfo(id int, opt map[string]string) (*tmdb.Movie, error)
 	GetMoviePopular(opt map[string]string) (*tmdb.MoviePagedResults, error)
 	GetMovieRecommendations(id int, opt map[string]string) (*tmdb.MovieRecommendations, error)
 	GetMovieUpcoming(opt map[string]string) (*tmdb.MovieDatedResults, error)
 	GetMovieTopRated(opt map[string]string) (*tmdb.MoviePagedResults, error)
-}
-
-func getOptionsString(options map[string]string, availableOptions map[string]struct{}) string {
-	var optionsString = ""
-	for key, val := range options {
-		if _, ok := availableOptions[key]; ok {
-			newString := fmt.Sprintf("%s&%s=%s", optionsString, key, val)
-			optionsString = newString
-		}
-	}
-	return optionsString
+	GetMovieByGenres(genre string, page string) (*tmdb.MoviePagedResults, error)
+	GetMovieReviews(id int, opt map[string]string) (*tmdb.MovieReviews, error)
 }
 
 type TMDbRepository struct {
@@ -43,8 +31,8 @@ func NewTMDbRepository() *TMDbRepository {
 	return &TMDbRepository{}
 }
 
-func (repo TMDbRepository) GetMovieInfo(opt map[string]string) (*tmdb.Movie, error) {
-	result, err := tmdbAPI.GetMovieInfo(550, opt)
+func (repo TMDbRepository) GetMovieInfo(id int, opt map[string]string) (*tmdb.Movie, error) {
+	result, err := tmdbAPI.GetMovieInfo(id, opt)
 	return result, err
 }
 
@@ -68,13 +56,23 @@ func (repo TMDbRepository) GetMovieTopRated(opt map[string]string) (*tmdb.MovieP
 	return result, err
 }
 
-// func (repo TMDbRepository) GetMovieGenres() {
-// 	var availableOptions = map[string]struct{}{
-// 		"page":     {},
-// 		"language": {}}
-// 	var popular MoviePagedResults
-// 	optionsString := getOptionsString(opt, availableOptions)
-// 	uri := fmt.Sprintf("%s/movie/popular?api_key=%s%s", baseURL, ApiKey, optionsString)
-// 	result, err := tmdb.getTmdb(uri, &popular)
-// 	return result.(*MoviePagedResults), err
-// }
+func (repo TMDbRepository) GetMovieReviews(id int, opt map[string]string) (*tmdb.MovieReviews, error) {
+	result, err := tmdbAPI.GetMovieReviews(id, opt)
+	return result, err
+}
+
+func (repo TMDbRepository) GetMovieGenres() (*tmdb.Genre, error) {
+	uri := fmt.Sprintf("%s/genre/movie/list?api_key=%s&language=en-US", baseURL, ApiKey)
+	var genres tmdb.Genre
+	result, err := getTmdb(uri, &genres)
+	return result.(*tmdb.Genre), err
+}
+
+func (repo TMDbRepository) GetMovieByGenres(genre string, page string) (*tmdb.MoviePagedResults, error) {
+	uri := fmt.Sprintf("%s/discover/movie?api_key=%s&with_genres=%s&page=%s", baseURL, ApiKey, genre, page)
+	var genres tmdb.MoviePagedResults
+	result, err := getTmdb(uri, &genres)
+	return result.(*tmdb.MoviePagedResults), err
+}
+
+// https://api.themoviedb.org/3/discover/movie?api_key=7d2b91f400ce0e8625786102fdf95451&with_genres=27
