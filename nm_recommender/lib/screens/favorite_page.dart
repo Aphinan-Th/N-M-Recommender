@@ -25,7 +25,6 @@ class _FavoritePageState extends State<FavoritePage> {
     super.initState();
     provider = Provider.of<MovieProvider>(context, listen: false);
     provider.fetchData();
-    provider.fetchGenre();
   }
 
   late String dropdowns = 'Movies';

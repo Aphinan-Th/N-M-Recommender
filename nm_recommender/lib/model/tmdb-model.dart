@@ -281,3 +281,42 @@ class TmdbTopRate {
         "total_results": totalResults,
     };
 }
+// To parse this JSON data, do
+//
+//     final tmdbMoiveGenre = tmdbMoiveGenreFromJson(jsonString);
+
+TmdbMovieGenre tmdbMovieGenreFromJson(String str) => TmdbMovieGenre.fromJson(json.decode(str));
+
+String tmdbMovieGenreToJson(TmdbMovieGenre data) => json.encode(data.toJson());
+
+class TmdbMovieGenre {
+    TmdbMovieGenre({
+        required this.id,
+        required this.page,
+        required this.results,
+        required this.totalPages,
+        required this.totalResults,
+    });
+
+    int id;
+    int page;
+    List<Result> results;
+    int totalPages;
+    int totalResults;
+
+    factory TmdbMovieGenre.fromJson(Map<String, dynamic> json) => TmdbMovieGenre(
+        id: json["ID"],
+        page: json["Page"],
+        results: List<Result>.from(json["Results"].map((x) => Result.fromJson(x))),
+        totalPages: json["total_pages"],
+        totalResults: json["total_results"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "ID": id,
+        "Page": page,
+        "Results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "total_pages": totalPages,
+        "total_results": totalResults,
+    };
+}

@@ -27,7 +27,6 @@ class _NovelPageState extends State<NovelPage> {
     super.initState();
     provider = Provider.of<MovieProvider>(context, listen: false);
     provider.fetchData();
-    provider.fetchGenre();
   }
 
   @override
@@ -60,7 +59,7 @@ class _NovelPageState extends State<NovelPage> {
                 genreNovel.length,
                 (index) => genreNovel[index],
               ),
-              callBack: () => Navigator.pushNamed(context, '/recommend'),
+              // callBack: () => Navigator.pushNamed(context, '/recommend'),
             ),
           ),
           Padding(

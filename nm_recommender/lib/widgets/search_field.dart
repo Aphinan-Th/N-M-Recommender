@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nm_recommender/screens/searching_screen.dart';
 import '../assets/style.dart';
+import '../screens/recommend_page.dart';
 
 class SearchField extends StatelessWidget {
   final ValueChanged<String> onSearch;
@@ -30,6 +32,10 @@ class SearchField extends StatelessWidget {
           focusedBorder: outlineInputBorder,
           fillColor: ThemeColor.white,
         ),
+        onTap: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const SearchingScreen()));
+        },
         onChanged: (value) {
           onSearch(value.toLowerCase());
         },

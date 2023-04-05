@@ -35,11 +35,13 @@ func (handler *AuthHandler) SignUp(c *gin.Context) {
 	var user model.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(500, err)
+		return
 	}
 
 	result, err := handler.UserService.SignIn(user)
 	if err != nil {
 		c.JSON(500, err)
+		return
 	}
 	if result.ID == primitive.NilObjectID {
 		c.JSON(500, gin.H{"error": "Already have an account? Duplicate Email or Username"})
@@ -61,11 +63,13 @@ func (handler *AuthHandler) Login(c *gin.Context) {
 	var user model.UserLogin
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(500, err)
+		return
 	}
 
 	result, err := handler.UserService.LogIn(user)
 	if err != nil || result.Status != model.Success {
-		c.JSON(500, err)
+		c.JSON(500, result)
+		return
 	}
 
 	accessToken, err := handler.TokenService.GenerateToken(result.User_Id)

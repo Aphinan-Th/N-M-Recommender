@@ -19,50 +19,45 @@ class MoviePage extends StatefulWidget {
 
 class _MoviePageState extends State<MoviePage> {
   late MovieProvider provider;
-  void onSearch(String value) {
-    setState(() {});
-  }
 
   @override
   void initState() {
     super.initState();
     provider = Provider.of<MovieProvider>(context, listen: false);
     provider.fetchData();
-    provider.fetchGenre();
+  }
+
+  void onSearch(String value) {
+    // Update the state here, outside of the build method
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<MovieProvider>(context);
     final isLoading = provider.isLoading;
-    final genres = provider.tmDbGenres?.genres;
     final popularResults = provider.tmDbPopular?.results;
-    final recommendResults = provider.tmDbRecommend?.results;
-    final upcomingResults = provider.tmDbUpcoming?.results;
-    final topRateResults = provider.tmdbTopRate?.results;
-
-    if (genres == null ||
+    // final recommendResults = provider.tmDbRecommend?.results;
+    // final upcomingResults = provider.tmDbUpcoming?.results;
+    // final topRateResults = provider.tmdbTopRate?.results;
+    if (
         popularResults == null ||
-        recommendResults == null ||
-        upcomingResults == null ||
-        topRateResults == null ||
+        // recommendResults == null ||
+        // upcomingResults == null ||
+        // topRateResults == null ||
         isLoading) {
       return const Center(child: LoadingScreen());
     }
     return SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SearchField(onSearch: (value) {
-            setState(() {});
-          }),
+          SearchField(onSearch: onSearch),
           Consumer<MovieProvider>(
             builder: (context, provider, child) => ScrollType(
               type: List.generate(
-                genres.length,
-                (index) => genres[index].name,
+                provider.tmDbGenres?.genres.length ?? 0,
+                (index) => (provider.tmDbGenres?.genres[index].name ?? ""),
               ),
-              callBack: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const RecommendPage())),
             ),
           ),
           Padding(
@@ -70,7 +65,7 @@ class _MoviePageState extends State<MoviePage> {
             child: bold20("Recommend"),
           ),
           _buildScrollImage(
-              recommendResults,
+              popularResults,
               const EdgeInsets.only(right: 24, left: 24, bottom: 12),
               150,
               200,
@@ -79,7 +74,7 @@ class _MoviePageState extends State<MoviePage> {
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
             child: bold20("Upcoming movie"),
           ),
-          _buildScrollImage(upcomingResults,
+          _buildScrollImage(popularResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
@@ -91,7 +86,7 @@ class _MoviePageState extends State<MoviePage> {
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
             child: bold20("Top rate movie "),
           ),
-          _buildScrollImage(topRateResults,
+          _buildScrollImage(popularResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
         ]));
   }

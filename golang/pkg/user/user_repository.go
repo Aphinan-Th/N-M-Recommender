@@ -78,45 +78,71 @@ func (repo *UserRepository) GetAllUser() ([]model.User, error) {
 
 func (repo *UserRepository) UserInfo(userId primitive.ObjectID) (model.User, error) {
 	user := model.User{}
-	users, err := repo.GetAllUser()
-	for _, oldUser := range users {
-		if oldUser.ID == userId {
-			return oldUser, err
+	filter := bson.D{
+		{
+			Key:   "_id",
+			Value: userId,
+		},
+	}
+	err := repo.getCollection().FindOne(context.Background(), filter).Decode(&user)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return user, err
 		}
+		return user, err
 	}
 	return user, nil
 }
 
 func (repo *UserRepository) SignIn(user model.User) (model.User, error) {
+	filter := bson.D{
+		{
+			Key:   "email",
+			Value: user.Email,
+		},
+		{
+			Key:   "password",
+			Value: user.Password,
+		},
+	}
 
-	users, err := repo.GetAllUser()
-	for _, oldUser := range users {
-		if oldUser.Username == user.Username || oldUser.Email == user.Email {
+	err := repo.getCollection().FindOne(context.Background(), filter).Decode(&user)
+	if err != nil && err == mongo.ErrNoDocuments {
+		result, err := repo.getCollection().InsertOne(context.TODO(), user)
+		if err != nil {
 			return model.User{}, err
 		}
-	}
-	result, err := repo.getCollection().InsertOne(context.TODO(), user)
-	if err != nil {
-		return model.User{}, err
+
+		user.ID = result.InsertedID.(primitive.ObjectID)
+		return user, err
 	}
 
-	user.ID = result.InsertedID.(primitive.ObjectID)
-	return user, err
+	return model.User{}, err
 }
 
 func (repo *UserRepository) LogIn(user model.UserLogin) (model.Status, error) {
 	status := model.Status{}
-	users, err := repo.GetAllUser()
-	for _, oldUser := range users {
-		if oldUser.Email == user.Email && oldUser.Password == user.Password {
-			status = model.Status{Status: model.Success, ErrorString: "nil", User_Id: oldUser.ID}
-		} else {
-			status = model.Status{Status: model.Failed, ErrorString: "Wrong Email or Password"}
-		}
+
+	filter := bson.D{
+		{
+			Key:   "email",
+			Value: user.Email,
+		},
+		{
+			Key:   "password",
+			Value: user.Password,
+		},
 	}
+
+	err := repo.getCollection().FindOne(context.Background(), filter).Decode(&status)
 	if err != nil {
-		return model.Status{}, err
+
+		if err == mongo.ErrNoDocuments {
+			return model.Status{Status: "Failed", ErrorString: "Wrong Email or Password"}, err
+		}
+		return model.Status{Status: "Failed", ErrorString: "Something went wrong"}, err
 	}
+	status.Status = "Success"
 	return status, err
 }
 
