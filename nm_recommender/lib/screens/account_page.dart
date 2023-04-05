@@ -155,6 +155,7 @@ class _AccountListViewState extends State<AccountListView> {
     return ListTile(
       title: Text(
         listName,
+        style: const TextStyle(fontSize: 17.0, fontWeight: FontWeight.w400),
       ),
       contentPadding: const EdgeInsets.only(left: 20, right: 20),
       leading: Icon(
@@ -206,15 +207,15 @@ class _LogoutButtonState extends State<LogoutButton> {
               builder: ((context, value, child) {
                 return Button(
                   buttonName: "Log out",
-                  bgColor: ThemeColor.white,
-                  width: 333.2,
+                  bgColor: Colors.red.shade400,
+                  width: 300,
                   height: 50,
                   callBack: () {
                     value.logout();
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const SuggestPage()));
                   },
-                  textColor: ThemeColor.black,
+                  textColor: ThemeColor.white,
                 );
               }),
             )),

@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Avatar(
                               radius: 75,
                               profileImage:
-                                  'https://static.trueplookpanya.com/tppy/member/m_545000_547500/545994/cms/images/2019-Q3/%E0%B9%81%E0%B8%A1%E0%B8%A79%E0%B8%8A%E0%B8%B5%E0%B8%A7%E0%B8%B4%E0%B8%95.jpg'),
+                                  'https://cdn.discordapp.com/attachments/735398941201268836/1093189697313976420/image.png'),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 24),
