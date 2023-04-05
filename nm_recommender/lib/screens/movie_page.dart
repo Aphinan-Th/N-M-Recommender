@@ -37,14 +37,14 @@ class _MoviePageState extends State<MoviePage> {
     final provider = Provider.of<MovieProvider>(context);
     final isLoading = provider.isLoading;
     final popularResults = provider.tmDbPopular?.results;
-    // final recommendResults = provider.tmDbRecommend?.results;
-    // final upcomingResults = provider.tmDbUpcoming?.results;
-    // final topRateResults = provider.tmdbTopRate?.results;
+    final recommendResults = provider.tmDbRecommend?.results;
+    final upcomingResults = provider.tmDbUpcoming?.results;
+    final topRateResults = provider.tmdbTopRate?.results;
     if (
         popularResults == null ||
-        // recommendResults == null ||
-        // upcomingResults == null ||
-        // topRateResults == null ||
+        recommendResults == null ||
+        upcomingResults == null ||
+        topRateResults == null ||
         isLoading) {
       return const Center(child: LoadingScreen());
     }
@@ -65,7 +65,7 @@ class _MoviePageState extends State<MoviePage> {
             child: bold20("Recommend"),
           ),
           _buildScrollImage(
-              popularResults,
+              recommendResults,
               const EdgeInsets.only(right: 24, left: 24, bottom: 12),
               150,
               200,
@@ -74,7 +74,7 @@ class _MoviePageState extends State<MoviePage> {
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
             child: bold20("Upcoming movie"),
           ),
-          _buildScrollImage(popularResults,
+          _buildScrollImage(upcomingResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
@@ -86,7 +86,7 @@ class _MoviePageState extends State<MoviePage> {
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
             child: bold20("Top rate movie "),
           ),
-          _buildScrollImage(popularResults,
+          _buildScrollImage(topRateResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
         ]));
   }

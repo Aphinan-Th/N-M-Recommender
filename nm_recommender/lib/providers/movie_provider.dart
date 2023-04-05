@@ -34,14 +34,12 @@ class MovieProvider with ChangeNotifier {
   int _movieGenrePage = 1;
 
   Future<dynamic> fetchData() async {
-    int page = 1;
     _isLoading = true;
     try {
-      page++;
-      _tmDbPopular = await getMoviePopular(page);
-      _tmDbRecommend = await getMovieRecommend(page);
-      _tmDbUpcoming = await getMovieUpcoming(page);
-      _tmdbTopRate = await getMovieTopRate(page);
+      _tmDbPopular = await getMoviePopular(1);
+      _tmDbRecommend = await getMovieRecommend(2);
+      _tmDbUpcoming = await getMovieUpcoming(1);
+      _tmdbTopRate = await getMovieTopRate(1);
       _tmDbGenres = await getGenres();
       notifyListeners();
       _hasError = false;
@@ -63,7 +61,7 @@ class MovieProvider with ChangeNotifier {
   void reducePopularPage() {
     if (_popularPage <= 1) return;
     _popularPage--;
-    updateDataPopular();
+    updateDataPopular(); 
   }
 
   Future<dynamic> updateDataPopular() async {
