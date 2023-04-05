@@ -15,6 +15,8 @@ class MovieProvider with ChangeNotifier {
   TmdbTopRate? _tmdbTopRate;
   TmdbMovieGenre? _tmdbMovieGenre;
 
+  MovieInfo? _movieInfo;
+
   int _genreId = 0;
   int index = 0;
   TmDbPopular? get tmDbPopular => _tmDbPopular;
@@ -24,6 +26,8 @@ class MovieProvider with ChangeNotifier {
   TmdbTopRate? get tmdbTopRate => _tmdbTopRate;
   TmdbMovieGenre? get tmdbMovieGenre => _tmdbMovieGenre;
 
+  MovieInfo? get movieInfo => _movieInfo;
+
   int? get genreId => _genreId;
   int? get movieGenrePage => _movieGenrePage;
 
@@ -32,6 +36,20 @@ class MovieProvider with ChangeNotifier {
   int _upcomingPage = 1;
   int _topRatePage = 1;
   int _movieGenrePage = 1;
+
+  Future getMovieInfo(int id) async {
+    _isLoading = true;
+    try {
+      _movieInfo = await getMovieInfo(id);
+      notifyListeners();
+      _hasError = false;
+    } catch (e) {
+      _hasError = true;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
 
   Future<dynamic> fetchData() async {
     _isLoading = true;

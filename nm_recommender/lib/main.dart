@@ -6,6 +6,7 @@ import 'package:nm_recommender/screens/recommend_page.dart';
 import 'package:nm_recommender/screens/suggestion_page.dart';
 import 'package:nm_recommender/widgets/navbar.dart';
 import 'package:provider/provider.dart';
+import 'screens/detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
             '/login': (context) => const LoginPage(),
             '/recommend': (context) => const RecommendPage(),
             '/detail': (context) => Container(),
-            '/navbar': (context) => const Navbar()
+            '/navbar': (context) => const Navbar(),
+            '/detail': (context) => const DetailPage()
           },
           home: SafeArea(
               child: LoginPage(

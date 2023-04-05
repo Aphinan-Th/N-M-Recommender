@@ -62,7 +62,7 @@ class _MoviePageState extends State<MoviePage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
-            child: bold20("Recommend"),
+            child: bold20("Recommended"),
           ),
           _buildScrollImage(
               recommendResults,
@@ -72,25 +72,30 @@ class _MoviePageState extends State<MoviePage> {
               isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
+
             child: bold20("Upcoming movie"),
+
           ),
           _buildScrollImage(upcomingResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
-            child: bold20("Popular movie"),
+            child: bold20("Popular Movies"),
           ),
           _buildScrollImage(popularResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
           Padding(
             padding: const EdgeInsets.only(top: 12, left: 24, bottom: 12),
+
             child: bold20("Top rate movie "),
+
           ),
           _buildScrollImage(topRateResults,
               const EdgeInsets.only(left: 24, bottom: 12), 75, 100, isLoading),
         ]));
   }
 }
+
 
 Widget _buildScrollImage(List<Result> results, EdgeInsets padding, double width,
     double height, bool isLoading) {

@@ -52,6 +52,18 @@ Future getMovieTopRate(int page) async {
   }
 }
 
+Future getMovieInfo(int id) async {
+  final response = await http.get(
+      Uri.parse('http://10.0.2.2:8080/api/v1/tmdb/movie-info$id'));
+  if (response.statusCode == 200) {
+    final result = movieInfoFromJson(response.body);
+    return result;
+  } else {
+    throw Exception('Failed to fetch data');
+  }
+}
+
+
 Future getMovieByGenre(int id, int page) async {
   final response = await http.get(Uri.parse(
       'http://10.0.2.2:8080/api/v1/tmdb/movie-by-genre?genre_id=$id&page=$page'));
