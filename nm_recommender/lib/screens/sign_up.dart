@@ -4,51 +4,94 @@ import 'package:nm_recommender/screens/login_page.dart';
 import 'package:nm_recommender/widgets/avatar.dart';
 import 'package:nm_recommender/widgets/button.dart';
 import 'package:nm_recommender/widgets/navbar.dart';
-import '../widgets/text_field.dart';
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+import 'package:nm_recommender/widgets/sign_up_form.dart';
+import '../widgets/login_form.dart';
 
-  @override
-  State<SignUp> createState() => _SignUpState();
-}
+class SignUp extends StatelessWidget {
+  const SignUp({super.key});
 
-class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeColor.primaryBg,
-      appBar: AppBar(
         backgroundColor: ThemeColor.primaryBg,
-        elevation: 0,
-        leading: GestureDetector(
-          child: const Icon(
-            Icons.arrow_back_ios,
-            color: ThemeColor.black,
+        appBar: AppBar(
+          backgroundColor: ThemeColor.primaryBg,
+          elevation: 0,
+          leading: GestureDetector(
+            child: const Icon(
+              Icons.arrow_back_ios,
+              color: ThemeColor.black,
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            },
           ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginPage()),
-            );
-          },
+          title: const Text(
+            "Sign Up",
+            style: TextStyle(color: ThemeColor.black, fontSize: 25),
+          ),
         ),
-        title: const Text("Sign Up",
-        style: TextStyle(color: ThemeColor.black, fontSize: 25),),
-      ),
-      body: Column(
-        children: const [
-          EditPicture(),
-          DetailInfo(),
-          SignUpButton()
-        ],
-
-      )
-      //DetailInfo(),
-    );
+        body: SingleChildScrollView(
+            child: Column(
+          children: const [
+            EditPicture(),
+            Padding(
+                padding: EdgeInsets.all(10.0),
+                child: SignUpForm(
+                    borderColor: ThemeColor.gray,
+                    errorBorderColor: ThemeColor.alternate))
+          ],
+        )));
   }
 }
 
-// Profile Picture can change function
+// class SignUp extends StatefulWidget {
+//   const SignUp({Key? key}) : super(key: key);
+
+//   @override
+//   State<SignUp> createState() => _SignUpState();
+// }
+
+// class _SignUpState extends State<SignUp> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: ThemeColor.primaryBg,
+//       appBar: AppBar(
+//         backgroundColor: ThemeColor.primaryBg,
+//         elevation: 0,
+//         leading: GestureDetector(
+//           child: const Icon(
+//             Icons.arrow_back_ios,
+//             color: ThemeColor.black,
+//           ),
+//           onTap: () {
+//             Navigator.push(
+//               context,
+//               MaterialPageRoute(builder: (context) => const LoginPage()),
+//             );
+//           },
+//         ),
+//         title: const Text("Sign Up",
+//         style: TextStyle(color: ThemeColor.black, fontSize: 25),),
+//       ),
+//       body: Column(
+//         children: const [
+//           EditPicture(),
+//           DetailInfo(),
+//           SignUpButton()
+//         ],
+
+//       )
+//       //DetailInfo(),
+//     );
+//   }
+// }
+
+// // Profile Picture can change function
 class EditPicture extends StatefulWidget {
   const EditPicture({Key? key}) : super(key: key);
 
@@ -80,126 +123,127 @@ class _EditPictureState extends State<EditPicture> {
   }
 }
 
-// detail of 3 Text field
-class DetailInfo extends StatefulWidget {
-  const DetailInfo({Key? key}) : super(key: key);
+// // detail of 3 Text field
+// class DetailInfo extends StatefulWidget {
+//   const DetailInfo({Key? key}) : super(key: key);
 
-  @override
-  State<DetailInfo> createState() => _DetailInfoState();
-}
+//   @override
+//   State<DetailInfo> createState() => _DetailInfoState();
+// }
 
-class _DetailInfoState extends State<DetailInfo> {
-  var detailInfo = {
-    1: {
-      "headDetail": "Username",
-      "hintTextField": "username",
-    },
-    2: {
-      "headDetail": "Email",
-      "hintTextField": "email",
-    },
-    3: {
-      "headDetail": "Password",
-      "hintTextField": "password",
-    },
-  };
+// class _DetailInfoState extends State<DetailInfo> {
+//   var detailInfo = {
+//     1: {
+//       "headDetail": "Username",
+//       "hintTextField": "username",
+//     },
+//     2: {
+//       "headDetail": "Email",
+//       "hintTextField": "email",
+//     },
+//     3: {
+//       "headDetail": "Password",
+//       "hintTextField": "password",
+//     },
+//   };
 
-  @override
-  Widget build(BuildContext context) {
-    final screenW = MediaQuery.of(context).size.width;
-    debugPrint(screenW.toString());
-    return SizedBox(
-      height: 380,
-      child: ListView.builder(
-        itemCount: detailInfo.length,
-        itemBuilder: (context, index) {
-          return SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: PlatformDetail(
-              num: index + 1,
-              info: detailInfo,
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final screenW = MediaQuery.of(context).size.width;
+//     debugPrint(screenW.toString());
+//     return SizedBox(
+//       height: 380,
+//       child: ListView.builder(
+//         itemCount: detailInfo.length,
+//         itemBuilder: (context, index) {
+//           return SizedBox(
+//             width: MediaQuery.of(context).size.width,
+//             child: PlatformDetail(
+//               num: index + 1,
+//               info: detailInfo,
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
 
-// platform detail use for 3 text field
-class PlatformDetail extends StatefulWidget {
-  const PlatformDetail({Key? key, required int this.num, required this.info,}) : super(key: key);
+// // platform detail use for 3 text field
+// class PlatformDetail extends StatefulWidget {
+//   const PlatformDetail({Key? key, required int this.num, required this.info,}) : super(key: key);
 
-  final int num;
-  final Map<dynamic, dynamic> info;
+//   final int num;
+//   final Map<dynamic, dynamic> info;
 
-  @override
-  State<PlatformDetail> createState() => _PlatformDetailState();
-}
+//   @override
+//   State<PlatformDetail> createState() => _PlatformDetailState();
+// }
 
-class _PlatformDetailState extends State<PlatformDetail> {
-  late String headDetail;
-  late String hintTextField;
+// class _PlatformDetailState extends State<PlatformDetail> {
+//   late String headDetail;
+//   late String hintTextField;
+// final _formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    super.initState();
-    headDetail = widget.info[widget.num]["headDetail"];
-    hintTextField = widget.info[widget.num]["hintTextField"];
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     headDetail = widget.info[widget.num]["headDetail"];
+//     hintTextField = widget.info[widget.num]["hintTextField"];
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-        children:[
-          Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(left: 30, bottom: 10, top: 20),
-                alignment: Alignment.centerLeft,
-                child: Text(headDetail,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 40, right: 40),
-                alignment: Alignment.centerLeft,
-                child: CreateTextField(
-                  hintText: hintTextField,
-                  borderColor: ThemeColor.gray,
-                  errorBorderColor: ThemeColor.alternate,
-                  validation: "-",
-                  icon: Icons.clear,
-                )
-              ),
-            ],
-          ),
-        ]
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//         children:[
+//           Column(
+//             children: [
+//               Container(
+//                 margin: const EdgeInsets.only(left: 30, bottom: 10, top: 20),
+//                 alignment: Alignment.centerLeft,
+//                 child: Text(headDetail,
+//                   style: const TextStyle(
+//                     fontSize: 18,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//               ),
+//               Container(
+//                 margin: const EdgeInsets.only(left: 40, right: 40),
+//                 alignment: Alignment.centerLeft,
+//                 child: CreateTextField(
+//                   hintText: hintTextField,
+//                   borderColor: ThemeColor.gray,
+//                   errorBorderColor: ThemeColor.alternate,
+//                   validation: "-",
+//                   icon: Icons.clear, type: FieldType.username,
+//                 )
+//               ),
+//             ],
+//           ),
+//         ]
+//     );
+//   }
+// }
 
-// Button
-class SignUpButton extends StatefulWidget {
-  const SignUpButton({Key? key}) : super(key: key);
+// // Button
+// class SignUpButton extends StatefulWidget {
+//   const SignUpButton({Key? key}) : super(key: key);
 
-  @override
-  State<SignUpButton> createState() => _SignUpButtonState();
-}
+//   @override
+//   State<SignUpButton> createState() => _SignUpButtonState();
+// }
 
-class _SignUpButtonState extends State<SignUpButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Button(buttonName: "Sign Up",
-    textColor: ThemeColor.black,
-    bgColor: ThemeColor.white,
-    width: 310, height: 50,
-    callBack: () {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const Navbar()));
-    },);
-  }
-}
+// class _SignUpButtonState extends State<SignUpButton> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Button(buttonName: "Sign Up",
+//     textColor: ThemeColor.black,
+//     bgColor: ThemeColor.white,
+//     width: 310, height: 50,
+//     callBack: () {
+//       Navigator.of(context).push(MaterialPageRoute(
+//         builder: (context) => const Navbar()));
+//     },);
+//   }
+// }

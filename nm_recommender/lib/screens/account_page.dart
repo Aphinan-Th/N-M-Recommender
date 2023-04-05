@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nm_recommender/assets/style.dart';
+import 'package:nm_recommender/providers/auth_provider.dart';
 import 'package:nm_recommender/screens/about_page.dart';
 import 'package:nm_recommender/screens/contact_page.dart';
 import 'package:nm_recommender/screens/setting_page.dart';
 import 'package:nm_recommender/screens/suggestion_page.dart';
 import 'package:nm_recommender/widgets/avatar.dart';
 import 'package:nm_recommender/widgets/button.dart';
+import 'package:provider/provider.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -19,20 +21,18 @@ class _AccountPageState extends State<AccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ThemeColor.primaryBg,
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              alignment: Alignment.topLeft,
-              margin: const EdgeInsets.only(left: 20, top: 10),
-              child: title("My Profile"),
-            ),
-            ProfilePic(),
-            AccountListInfo(),
-            const LogoutButton()
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Container(
+            alignment: Alignment.topLeft,
+            margin: const EdgeInsets.only(left: 20, top: 10),
+            child: title("My Profile"),
+          ),
+          const ProfilePic(),
+          const AccountListInfo(),
+          const LogoutButton()
+        ],
       ),
     );
   }
@@ -53,28 +53,31 @@ class _ProfilePicState extends State<ProfilePic> {
         Container(
           margin: const EdgeInsets.only(left: 20, top: 10),
           child: const Avatar(
-          radius: 50,
-          profileImage: '',
+            radius: 50,
+            profileImage: '',
           ),
         ),
         Container(
-          margin: const EdgeInsets.only(left: 20, top: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                alignment: Alignment.topLeft,
-                child: text14("Phattharani"),
-              ),
-              body("phat.thongsriphong@kkumail.com"),
-            ],
-          ),
-        )
+            margin: const EdgeInsets.only(left: 20, top: 10),
+            child: Consumer<AuthProvider>(
+              builder: ((context, value, child) {
+                value.getUserInfo("6426adeb6ff8bad4e5128b09");
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: text14(value.username),
+                    ),
+                    body(value.email),
+                  ],
+                );
+              }),
+            ))
       ],
     );
   }
 }
-
 
 //Account List Info
 class AccountListInfo extends StatefulWidget {
@@ -104,12 +107,12 @@ class _AccountListInfoState extends State<AccountListInfo> {
   Widget build(BuildContext context) {
     final screenW = MediaQuery.of(context).size.width;
     debugPrint(screenW.toString());
-    return Container(
+    return SizedBox(
       height: 300,
       child: ListView.builder(
         itemCount: accountInfo.length,
         itemBuilder: (context, index) {
-          return Container(
+          return SizedBox(
             width: MediaQuery.of(context).size.width,
             child: AccountListView(
               num: index + 1,
@@ -123,7 +126,11 @@ class _AccountListInfoState extends State<AccountListInfo> {
 }
 
 class AccountListView extends StatefulWidget {
-  const AccountListView({Key? key, required int this.num, required this.info,}) : super(key: key);
+  const AccountListView({
+    Key? key,
+    required int this.num,
+    required this.info,
+  }) : super(key: key);
 
   final int num;
   final Map<dynamic, dynamic> info;
@@ -145,25 +152,37 @@ class _AccountListViewState extends State<AccountListView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(title: Text(listName,),
-          contentPadding: const EdgeInsets.only(left: 20, right: 20),
-          leading: Icon(leadingIcon, color: ThemeColor.primary, size: 24,),
-          trailing: const Icon(Icons.arrow_forward_ios, size: 13,),
-          onTap: () =>
+    return ListTile(
+      title: Text(
+        listName,
+      ),
+      contentPadding: const EdgeInsets.only(left: 20, right: 20),
+      leading: Icon(
+        leadingIcon,
+        color: ThemeColor.primary,
+        size: 24,
+      ),
+      trailing: const Icon(
+        Icons.arrow_forward_ios,
+        size: 13,
+      ),
+      onTap: () => {
+        if (listName == "Setting")
           {
-            if (listName == "Setting") {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const SettingPage()))
-            } else
-              if (listName == "About") {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const AboutPage()))
-              } else
-                if (listName == "Contact") {
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => const ContactPage()))
-                }
-          },
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SettingPage()))
+          }
+        else if (listName == "About")
+          {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const AboutPage()))
+          }
+        else if (listName == "Contact")
+          {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ContactPage()))
+          }
+      },
     );
   }
 }
@@ -181,16 +200,24 @@ class _LogoutButtonState extends State<LogoutButton> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(padding: EdgeInsets.only(bottom: 20),
-          child: Button(buttonName: "Log out",
-            bgColor: ThemeColor.white,
-            width: 333.2, height: 50,
-            callBack: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SuggestPage()));
-            },
-            textColor: ThemeColor.black,
-          ),
-        ),
+        Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Consumer<AuthProvider>(
+              builder: ((context, value, child) {
+                return Button(
+                  buttonName: "Log out",
+                  bgColor: ThemeColor.white,
+                  width: 333.2,
+                  height: 50,
+                  callBack: () {
+                    value.logout();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const SuggestPage()));
+                  },
+                  textColor: ThemeColor.black,
+                );
+              }),
+            )),
       ],
     );
   }

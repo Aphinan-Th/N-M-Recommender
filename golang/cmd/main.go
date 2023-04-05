@@ -1,32 +1,99 @@
 package main
 
 import (
+	"context"
+	"fmt"
+	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
+	authhandler "github.com/aphinan633040184-9/golang-basic/handler/auth-handler.go"
+	favhandler "github.com/aphinan633040184-9/golang-basic/handler/fav-handler.go"
+	nythandler "github.com/aphinan633040184-9/golang-basic/handler/nyt-handler.go"
 	tmdbhandler "github.com/aphinan633040184-9/golang-basic/handler/tmdb-handler.go"
-	"github.com/aphinan633040184-9/golang-basic/handler/todohandler"
-	"github.com/aphinan633040184-9/golang-basic/handler/userhandler"
+	"github.com/aphinan633040184-9/golang-basic/middleware"
+	"github.com/gin-contrib/cors"
+	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 )
 
 func main() {
+	logger, _ := zap.NewProduction()
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	r.Use(ginzap.Ginzap(logger, time.RFC3339, true))
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"},
+		AllowHeaders:     []string{"Access-Control-Allow-Headers", "access-control-allow-origin, access-control-allow-headers", "Content-Type", "X-XSRF-TOKEN", "Accept", "Origin", "X-Requested-With", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
 
-	todohandler := todohandler.NewTodoHandler()
-	userhandler := userhandler.NewUserHandler()
-	tmdbhandler := tmdbhandler.NewTMDbHandler()
+	v1 := r.Group("/api/v1")
 
-	r.GET("/todo", todohandler.GetAllTodo)
-	r.POST("/todo", todohandler.PostTodo)
-	r.GET("/user", userhandler.GetAllUser)
-	r.GET("/tmdb-movie-info", tmdbhandler.GetMovieInfo)
-	r.GET("/tmdb-movie-popular/", tmdbhandler.GetMoviePopular)
-	r.GET("/tmdb-movie-recommend/", tmdbhandler.GetMovieRecommendationsPopular)
+	auth_handler := authhandler.NewAuthHandler()
+	tmdb_handler := tmdbhandler.NewTMDbHandler()
+	fav_handler := favhandler.NewFavoriteHandler()
+	nyt_handler := nythandler.NewNYTHandler()
+	authRoute := v1.Group("/auth")
+	tmdbRoute := v1.Group("/tmdb")
+	favRoute := v1.Group("/my-favorite")
+	nytRoute := v1.Group("/nyt")
 
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	authRoute.POST("/login", auth_handler.Login)
+	authRoute.POST("/sign-up", auth_handler.SignUp)
+	authRoute.PATCH("/change-password", auth_handler.ChangePassword)
+	authRoute.GET("/me", middleware.ValidationMiddleware, auth_handler.GetMe)
+	authRoute.GET("/user-info/:userId", auth_handler.GetUserInfo)
+
+	tmdbRoute.GET("/movie-info", tmdb_handler.GetMovieInfo)
+	tmdbRoute.GET("/movie-popular", tmdb_handler.GetMoviePopular)
+	tmdbRoute.GET("/movie-recommend", tmdb_handler.GetMovieRecommendationsPopular)
+	tmdbRoute.GET("/movie-upcoming", tmdb_handler.GetMovieUpcoming)
+	tmdbRoute.GET("/movie-top-rate", tmdb_handler.GetMovieTopRated)
+	tmdbRoute.GET("/movie-genre", tmdb_handler.GetMovieGenres)
+	tmdbRoute.GET("/movie-by-genre", tmdb_handler.GetMovieByGenre)
+	tmdbRoute.GET("/movie-reviews", tmdb_handler.GetMovieReviews)
+
+	nytRoute.GET("/novel-popular", nyt_handler.GetMostpopular)
+
+	favRoute.GET("", fav_handler.GetFavoriteByUserId)
+	favRoute.POST("", fav_handler.PostFavorite)
+	favRoute.DELETE("", fav_handler.DeleteFavorite)
+
+	port := fmt.Sprintf(":%s", "8080")
+
+	srv := &http.Server{
+		Addr:    port,
+		Handler: r,
+	}
+
+	go func() {
+		// service connections
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed { // listen and serve on 0.0.0.0:8080
+			logger.Error("listen: ", zap.Error(err))
+		}
+	}()
+
+	// Gracefully shutdown the server
+
+	// Wait for interrupt signal to gracefully shutdown the server with
+	// a timeout of 5 seconds.
+	quit := make(chan os.Signal)
+
+	//lint:ignore SA1017 ignore this!
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+	log.Println("Shutdown Server ...")
+
+	ctxR, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ctxR); err != nil {
+		log.Fatal("Server Shutdown:", err)
+	}
+	log.Println("Server exiting")
 }
