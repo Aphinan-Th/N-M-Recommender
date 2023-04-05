@@ -17,24 +17,24 @@ class _SuggestPageState extends State<SuggestPage> {
   final Map<int, Map<String, String>> pageInfo = {
     1: {
       "image":
-          "https://img.freepik.com/premium-vector/people-airport-terminal-infographics-elements-travel-concept-flat-vector-set_580420-2292.jpg?w=740",
+          "https://cdn.discordapp.com/attachments/735398941201268836/1093192873811382302/Untitled_Artwork.png",
       "sectionName": "Suggestions",
       "description":
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "Recommend movies and novels for you. You can watch trailers, read overviews and reviews of movies or novels",
     },
     2: {
       "image":
           "https://img.freepik.com/premium-vector/people-airport-terminal-infographics-elements-travel-concept-flat-vector-set_580420-2290.jpg?w=740",
-      "sectionName": "Favourites",
+      "sectionName": "Favorites",
       "description":
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "You can find many movies and novels and you can keep your favorite movies and novels in My favorites",
     },
     3: {
       "image":
           "https://img.freepik.com/premium-vector/people-airport-terminal-infographics-elements-travel-concept-flat-vector-set_580420-2300.jpg?w=740",
       "sectionName": "Reviews",
       "description":
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "You can read reviews when you interest in some movies and novels before you want to watch or read them",
     },
   };
 

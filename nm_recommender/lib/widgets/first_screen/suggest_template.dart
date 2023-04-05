@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class TemplatePage extends StatelessWidget {
@@ -18,7 +17,9 @@ class TemplatePage extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.center,
-          margin: const EdgeInsets.only(right: 13),
+          margin: const EdgeInsets.all(2.0),
+          width: 350,
+          height: 350,
           child: Image.network(image),
         ),
         Container(
@@ -27,7 +28,7 @@ class TemplatePage extends StatelessWidget {
           child: Text(
             sectionName,
             style: const TextStyle(
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 fontSize: 24,
                 fontFamily: "outfit"),
           ),
@@ -38,8 +39,8 @@ class TemplatePage extends StatelessWidget {
           child: Text(
             description,
             style: const TextStyle(
-                fontWeight: FontWeight.w300,
-                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                fontSize: 19,
                 fontFamily: "outfit"),
           ),
         ),
